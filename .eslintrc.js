@@ -1,27 +1,33 @@
 module.exports = {
-  root: true,
-  env: {
-    node: true,
-  },
-  extends: [
-    'plugin:vue/vue3-essential',
-    '@vue/airbnb',
-    '@vue/typescript/recommended',
-    'plugin:prettier/recommended',
-    'prettier/vue'
-  ],
-  parserOptions: {
-    ecmaVersion: 2020,
-  },
-  rules: {
-    'no-console': 'warn',
-    'no-debugger': 'warn',
-    quotes: ['warn', 'single'],
+	root: true,
+	env: {
+		node: true
+	},
+	extends: [
+		'plugin:vue/vue3-essential',
+		'eslint:recommended',
+		'@vue/typescript/recommended',
+		'plugin:prettier-vue/recommended'
+	],
+	parserOptions: {
+		ecmaVersion: 2020
+	},
+	rules: {
+		'no-console': 'warn',
+		'no-debugger': 'warn',
+		quotes: ['warn', 'single'],
 		semi: ['warn', 'never'],
 		indent: ['warn', 'tab'],
 		'vue/multi-word-component-names': 'warn',
 		'vue/no-multiple-template-root': 'off',
-    'vue/order-in-components': [
+		'vue/html-closing-bracket-newline': [
+			'warn',
+			{
+				singleline: 'never',
+				multiline: 'always'
+			}
+		],
+		'vue/order-in-components': [
 			'warn',
 			{
 				order: [
@@ -61,5 +67,19 @@ module.exports = {
 				]
 			}
 		],
-  },
-};
+		'prettier-vue/prettier': [
+			'warn',
+			{
+				printWidth: 120,
+				singleQuote: true,
+				semi: false,
+				trailingComma: 'none',
+				useTabs: true,
+				singleAttributePerLine: true,
+				jsxSingleQuote: true,
+				arrowParens: 'avoid',
+				bracketSameLine: true
+			}
+		]
+	}
+}
