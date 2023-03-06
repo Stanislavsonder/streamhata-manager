@@ -52,6 +52,16 @@ module.exports = {
 				'arraysInArrays': false
 			}
 		],
+		'vue/singleline-html-element-content-newline': ['warn',
+			{
+				'ignoreWhenNoAttributes': true,
+				'ignoreWhenEmpty': true,
+			}],
+		'vue/multiline-html-element-content-newline': ['warn',
+			{
+				'ignoreWhenEmpty': true,
+				'allowEmptyLines': false
+			}],
 		'array-element-newline': ['warn',
 			'always'],
 		quotes: [
@@ -70,6 +80,8 @@ module.exports = {
 		'vue/no-multiple-objects-in-class':'warn',
 		'vue/no-duplicate-attr-inheritance': 'warn',
 		//'vue/no-required-prop-with-default': 'warn',
+		//'vue/padding-lines-in-component-definition': 'warn',
+		//'vue/v-on-handler-style': 'warn',
 		'vue/no-static-inline-styles': 'warn',
 		'vue/no-template-target-blank': 'warn',
 		'vue/no-this-in-before-route-enter': 'error',
@@ -82,11 +94,9 @@ module.exports = {
 		'vue/require-direct-export': 'warn',
 		'vue/prefer-true-attribute-shorthand': 'warn',
 		'vue/prefer-prop-type-boolean-first': 'warn',
-		//'vue/padding-lines-in-component-definition': 'warn',
 		'vue/padding-line-between-blocks': 'warn',
 		'vue/no-useless-v-bind': 'warn',
 		'vue/multi-word-component-names': 'warn',
-		//'vue/v-on-handler-style': 'warn',
 		'vue/match-component-file-name': [
 			'warn',
 			{
