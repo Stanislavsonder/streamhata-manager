@@ -6,8 +6,10 @@ module.exports = {
 		'plugin:vue/vue3-strongly-recommended',
 		'@vue/typescript/recommended',
 	],
+	plugins: ['no-null'],
 	parserOptions: { ecmaVersion: 'latest', },
 	rules: {
+		'no-null/no-null': 'error',
 		'no-console': 'warn',
 		'no-debugger': 'warn',
 		'indent': [

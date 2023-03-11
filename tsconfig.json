@@ -12,9 +12,17 @@
     "useDefineForClassFields": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": ["webpack-env"],
+    "types": ["webpack-env", "node"],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@composable/*": ["src/composable/*"],
+      "@utils/*": ["src/utils/*"],
+      "@constants": ["src/utils/constants.ts"],
+      "@pages/*":  ["src/pages/*"],
+      "@services/*":  ["src/services/*"],
+      "@types": ["src/types/index.ts"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
