@@ -7,9 +7,52 @@
 			About
 		</router-link>
 	</nav>
-	<p>{{ $t('test-string') }}</p>
+	<div>
+		<p v-if="!getGames">
+			Loading...
+		</p>
+		<ul v-else>
+			<li
+				v-for="game in getGames"
+				:key="game.title"
+			>
+				{{ game.title }}
+			</li>
+		</ul>
+	</div>
+
 	<router-view />
 </template>
+
+<script lang="ts">
+import gql from 'graphql-tag'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+	name: 'App',
+	data() {
+		return {
+			getGames: undefined
+		}
+	},
+	apollo: {
+		getGames: {
+			query() {
+				return gql`{
+					getGames(query: { limit: 1000 }) {
+						title
+					}
+				}`
+			},
+			loadingKey: 'loading...'
+		}
+	}
+})
+</script>
+
+
+
+
 
 <style lang="scss" src="./styles/index.scss"/>
 
