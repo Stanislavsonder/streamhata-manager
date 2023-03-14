@@ -7,7 +7,7 @@
 			About
 		</router-link>
 	</nav>
-	<p>TEST TEXT</p>
+	<p>{{ $t('test-string') }}</p>
 	<router-view />
 </template>
 
