@@ -82,7 +82,6 @@ module.exports = {
 		'vue/no-multiple-objects-in-class':'warn',
 		'vue/no-duplicate-attr-inheritance': 'warn',
 		//'vue/no-required-prop-with-default': 'warn',
-		//'vue/padding-lines-in-component-definition': 'warn',
 		//'vue/v-on-handler-style': 'warn',
 		'vue/no-static-inline-styles': 'warn',
 		'vue/no-template-target-blank': 'warn',
@@ -267,5 +266,20 @@ module.exports = {
 				],
 			},
 		],
+		// 'vue/padding-lines-in-component-definition': [
+		// 	'warn',
+		// 	{
+		// 		'betweenOptions': 'always',
+		// 		'groupSingleLineProperties': true
+		// 	}
+		// ],
+		// 'vue/padding-line-between-tags': [
+		// 	'warn',
+		// 	[
+		// 		{
+		// 			'blankLine': 'always', 'prev': '*', 'next': '*' 
+		// 		}
+		// 	]
+		// ],
 	},
 }

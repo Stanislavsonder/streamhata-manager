@@ -1,4 +1,5 @@
 <template>
+	<AppHeader />
 	<nav>
 		<router-link to="/">
 			Home
@@ -10,6 +11,18 @@
 	<p>TEST TEXT</p>
 	<router-view />
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import AppHeader from './components/layout/header/AppHeader.vue'
+
+export default defineComponent({
+	name: 'App',
+	components: {
+		AppHeader
+	}
+})
+</script>
 
 <style lang="scss" src="./styles/index.scss"/>
 
