@@ -8,21 +8,56 @@
 			About
 		</router-link>
 	</nav>
-	<p>TEST TEXT</p>
+	<div>
+		<p v-if="!getGames">
+			Loading...
+		</p>
+		<ul v-else>
+			<li
+				v-for="game in getGames"
+				:key="game.title"
+			>
+				{{ game.title }}
+			</li>
+		</ul>
+	</div>
+
 	<router-view />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import gql from 'graphql-tag'
 import AppHeader from './components/layout/header/AppHeader.vue'
 
 export default defineComponent({
 	name: 'App',
 	components: {
 		AppHeader
+	},
+	data() {
+		return {
+			getGames: undefined
+		}
+	},
+	apollo: {
+		getGames: {
+			query() {
+				return gql`{
+					getGames(query: { limit: 1000 }) {
+						title
+					}
+				}`
+			},
+			loadingKey: 'loading...'
+		}
 	}
 })
 </script>
+
+
+
+
 
 <style lang="scss" src="./styles/index.scss"/>
 
