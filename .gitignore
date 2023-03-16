@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-apollo.config.js
 /dist
 
 
@@ -23,3 +22,4 @@ pnpm-debug.log*
 *.sln
 *.sw?
 .graphqlconfig
+apollo.config.js

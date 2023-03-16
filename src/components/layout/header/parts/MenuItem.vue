@@ -46,14 +46,32 @@ export default defineComponent({
 <style scoped lang="scss">
 	.menu-item {
 		padding: 0 8px;
-		border-radius: 10px;
+		position: relative;
+
+		&::after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			transform: scaleX(0);
+			height: 4px;
+			bottom: -4px;
+			left: 0;
+			background-color: #14ca88;
+			transform-origin: bottom right;
+			transition: transform 0.25s ease-out;
+		}
+
+		&.active::after {
+			transform: scaleX(1);
+		}
+
+		&:hover::after {
+			transform: scaleX(1);
+			transform-origin: bottom left;
+		}
 
 		&:not(:last-child) {
 			margin-right: 20px;
-		}
-
-		&.active {
-			background-color: aqua;
 		}
 
 		.link {

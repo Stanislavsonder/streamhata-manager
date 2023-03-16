@@ -1,9 +1,5 @@
 <template>
-	<header
-		class="header"
-		inverted
-		bordered
-	>
+	<header class="header">
 		<nav class="header__nav">
 			<ul class="main-menu">
 				<MenuItem
@@ -15,29 +11,44 @@
 				/>
 			</ul>
 			<ul class="account-menu">
-				<MenuItem
-					v-for="option in accountOptions"
-					:key="option.link"
-					:option="option"
-					:is-active="option.key === activeOptionKey"
-					@click="changeTab(option.key)"
-				/>
+				<li class="account-menu__item account">
+					<RouterLink
+						class="link"
+						to="#"
+					>
+						<NIcon
+							size="48"
+							:component="AccountIcon"
+						/>
+					</RouterLink>
+				</li>
+				<li class="account-menu__item">
+					<RouterLink
+						class="link"
+						to="#"
+					>
+						<NIcon
+							size="48"
+							:component="LogOutIcon"
+						/>
+					</RouterLink>
+				</li>
 			</ul>
 		</nav>
 	</header>
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue'
 import {
-	VideogameAssetFilled as GamesIcon, 
-	GroupsFilled as PlayersIcon, 
-	CameraOutdoorRound as SessionsIcon, 
+	SportsEsportsRound as GamesIcon, 
+	GroupRound as PlayersIcon, 
+	AmpStoriesRound as SessionsIcon, 
 	ManageAccountsRound as AccountIcon,
 	LogOutRound as LogOutIcon
 } from '@vicons/material'
 import { HeaderMenuOption } from '@/types'
 import MenuItem from './parts/MenuItem.vue'
-import { defineComponent } from 'vue'
 interface Data {
 	menuOptions: HeaderMenuOption[],
 	accountOptions: HeaderMenuOption[],
@@ -96,8 +107,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.header {	
-
+.header {
 	&__nav {
 		display: flex;
 		flex-direction: row;
@@ -110,5 +120,15 @@ export default defineComponent({
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+}
+
+.account-menu {
+	&__item {
+		padding: 0 8px;
+
+		&:not(:last-child) {
+			margin-right: 20px;
+		}
+	}
 }
 </style>
