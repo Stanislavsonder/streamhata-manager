@@ -4,10 +4,23 @@ import './registerServiceWorker'
 import router from '@/router'
 import i18n from '@/i18n'
 import apolloProvider from '@/graphql'
+import naive from 'naive-ui'
+
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+	components,
+	directives,
+})
+
 
 createApp(App)
 	.use(router)
 	.use(i18n)
+	.use(vuetify)
 	.use(apolloProvider)
 	.mount('#app')
-

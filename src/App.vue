@@ -1,4 +1,5 @@
 <template>
+	<AppHeader />
 	<nav>
 		<router-link to="/">
 			Home
@@ -25,11 +26,15 @@
 </template>
 
 <script lang="ts">
-import gql from 'graphql-tag'
 import { defineComponent } from 'vue'
+import gql from 'graphql-tag'
+import AppHeader from './components/layout/header/AppHeader.vue'
 
 export default defineComponent({
 	name: 'App',
+	components: {
+		AppHeader
+	},
 	data() {
 		return {
 			getGames: undefined

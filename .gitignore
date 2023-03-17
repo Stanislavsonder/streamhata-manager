@@ -22,5 +22,6 @@ pnpm-debug.log*
 *.sln
 *.sw?
 .graphqlconfig
+apollo.config.js
 pnpm-lock.yaml
 package-lock.json
