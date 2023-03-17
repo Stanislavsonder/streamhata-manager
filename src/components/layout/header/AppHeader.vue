@@ -11,25 +11,18 @@
 				/>
 			</ul>
 			<ul class="account-menu">
-				<li class="account-menu__item account">
+				<li
+					class="account-menu__item account"
+					v-for="option in accountOptions"
+					:key="option.key"
+				>
 					<RouterLink
 						class="link"
 						to="#"
 					>
 						<NIcon
 							size="48"
-							:component="AccountIcon"
-						/>
-					</RouterLink>
-				</li>
-				<li class="account-menu__item">
-					<RouterLink
-						class="link"
-						to="#"
-					>
-						<NIcon
-							size="48"
-							:component="LogOutIcon"
+							:component="option.icon"
 						/>
 					</RouterLink>
 				</li>
@@ -39,21 +32,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import {
-	SportsEsportsRound as GamesIcon, 
-	GroupRound as PlayersIcon, 
-	AmpStoriesRound as SessionsIcon, 
-	ManageAccountsRound as AccountIcon,
-	LogOutRound as LogOutIcon
+	defineComponent,
+} from 'vue'
+import {
+	SportsEsportsRound,
+	GroupRound,
+	AmpStoriesRound,
+	LogOutRound,
+	ManageAccountsRound
 } from '@vicons/material'
+
 import { HeaderMenuOption } from '@/types'
 import MenuItem from './parts/MenuItem.vue'
+
 interface Data {
 	menuOptions: HeaderMenuOption[],
 	accountOptions: HeaderMenuOption[],
 	activeOptionKey: string
 }
+
 export default defineComponent({
 	name: 'AppHeader',
 	components: {
@@ -67,19 +65,19 @@ export default defineComponent({
 				{
 					key: 'games',
 					label: 'Games',
-					icon: GamesIcon,
+					icon: SportsEsportsRound,
 					link: '#',
 				},
 				{
 					key: 'players',
 					label: 'Players',
-					icon: PlayersIcon,
+					icon: GroupRound,
 					link: '#'
 				},
 				{
 					key: 'sessions',
 					label: 'Sessions',
-					icon: SessionsIcon,
+					icon: AmpStoriesRound,
 					link: '#'
 				},
 			],
@@ -87,12 +85,12 @@ export default defineComponent({
 				{
 					key: 'profile',
 					label: 'Profile',
-					icon: AccountIcon,
+					icon: ManageAccountsRound ,
 					link: '#'
 				},
 				{
 					key: 'logout',
-					icon: LogOutIcon,
+					icon: LogOutRound,
 					link: '#',
 				},
 			]

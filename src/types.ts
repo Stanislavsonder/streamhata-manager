@@ -1,9 +1,11 @@
-import { Component } from 'vue'
+import {
+	Component
+} from 'vue'
 
 export type HeaderMenuOption = {
 	key: string
 	label?: string
-	icon?: Component
+	icon: Component
 	link: string
 }
 

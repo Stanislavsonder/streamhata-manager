@@ -13,7 +13,7 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
-    "types": ["webpack-env", "node"],
+    "types": ["webpack-env", "node", "naive-ui/volar"],
     "paths": {
       "@/*": ["src/*"],
       "@assets/*": ["src/assets/*"],
