@@ -27,13 +27,15 @@ import { HeaderMenuOption } from '@/types'
 
 export default defineComponent({
 	name: 'MenuItem',
-	components: { RouterLink },
+	components: {
+		NIcon, RouterLink
+	},
 	props: {
 		option: {
 			type: Object as PropType<HeaderMenuOption>,
 			required: true
 		},
-		isActive: { 
+		isActive: {
 			type: Boolean
 		}
 	}
