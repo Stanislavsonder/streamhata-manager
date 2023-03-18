@@ -1,4 +1,3 @@
-
 export type HeaderMenuOption = {
 	key: string
 	label?: string

@@ -10,7 +10,6 @@
 			<v-icon
 				class="link__icon"
 				size="48"
-				color="warning"
 				:icon="option.icon"
 			/>
 			<span class="link__label">
@@ -54,6 +53,7 @@ export default defineComponent({
 			height: 4px;
 			bottom: -4px;
 			left: 0;
+			// todo: change bg color to var
 			background-color: #14ca88;
 			transform-origin: bottom right;
 			transition: transform 0.25s ease-out;

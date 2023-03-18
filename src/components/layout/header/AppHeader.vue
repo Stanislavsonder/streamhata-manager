@@ -10,19 +10,32 @@
 					@click="changeTab(option.key)"
 				/>
 			</ul>
-			<ul class="account-menu">
+			<ul class="account-options">
 				<li
-					class="account-menu__item account"
-					v-for="option in accountOptions"
-					:key="option.key"
+					class="account-options__item account"
 				>
 					<RouterLink
 						class="link"
 						to="#"
 					>
-						<v-icon
-							size="48"
-							icon="mdi-controller"
+						<!-- todo: change color to use var ? -->
+						<v-btn
+							icon="mdi-account-circle"
+							color="grey-darken-3"
+						/>
+					</RouterLink>
+				</li>
+				<li
+					class="account-options__item logout"
+				>
+					<RouterLink
+						class="link"
+						to="#"
+					>
+						<!-- todo: change color to use var ? -->
+						<v-btn
+							icon="mdi-logout"
+							color="red-darken-4"
 						/>
 					</RouterLink>
 				</li>
@@ -40,8 +53,7 @@ import { HeaderMenuOption } from '@/types'
 import MenuItem from './parts/MenuItem.vue'
 
 interface Data {
-	menuOptions: HeaderMenuOption[],
-	accountOptions: HeaderMenuOption[],
+	menuOptions: HeaderMenuOption[]
 	activeOptionKey: string
 }
 
@@ -64,27 +76,14 @@ export default defineComponent({
 				{
 					key: 'players',
 					label: 'Players',
-					icon: 'mdi-controller',
+					icon: 'mdi-account-group',
 					link: '#'
 				},
 				{
 					key: 'sessions',
 					label: 'Sessions',
-					icon: 'mdi-controller',
+					icon: 'mdi-card-multiple',
 					link: '#'
-				},
-			],
-			accountOptions: [
-				{
-					key: 'profile',
-					label: 'Profile',
-					icon: 'mdi-controller' ,
-					link: '#'
-				},
-				{
-					key: 'logout',
-					icon: 'mdi-controller',
-					link: '#',
 				},
 			]
 		}
@@ -99,27 +98,32 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .header {
+	// todo: change to var
+	background-color: #212121;
+
 	&__nav {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		padding: 16px 32px;
+		padding: 16px;
 	}
 }
 
-.main-menu, .account-menu {
+.main-menu, .account-options {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
 
-.account-menu {
+.account-options {
 	&__item {
-		padding: 0 8px;
-
 		&:not(:last-child) {
 			margin-right: 20px;
 		}
+	}
+	
+	.link {
+		text-decoration: none;
 	}
 }
 </style>
