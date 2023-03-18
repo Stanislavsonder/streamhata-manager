@@ -7,10 +7,11 @@
 			class="link"
 			:to="option.link"
 		>
-			<NIcon
+			<v-icon
 				class="link__icon"
 				size="48"
-				:component="option.icon"
+				color="warning"
+				:icon="option.icon"
 			/>
 			<span class="link__label">
 				{{ option.label }}
@@ -23,14 +24,11 @@
 import { defineComponent } from 'vue'
 import { PropType } from 'vue'
 import { RouterLink } from 'vue-router'
-import { NIcon } from 'naive-ui'
 import { HeaderMenuOption } from '@/types'
 
 export default defineComponent({
 	name: 'MenuItem',
-	components: {
-		NIcon, RouterLink
-	},
+	components: { RouterLink },
 	props: {
 		option: {
 			type: Object as PropType<HeaderMenuOption>,

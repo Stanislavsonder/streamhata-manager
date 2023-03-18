@@ -4,7 +4,6 @@ import './registerServiceWorker'
 import router from '@/router'
 import i18n from '@/i18n'
 import apolloProvider from '@/graphql'
-import naive from 'naive-ui'
 
 // Vuetify
 import 'vuetify/styles'

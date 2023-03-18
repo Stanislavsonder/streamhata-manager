@@ -20,9 +20,9 @@
 						class="link"
 						to="#"
 					>
-						<NIcon
+						<v-icon
 							size="48"
-							:component="option.icon"
+							icon="mdi-controller"
 						/>
 					</RouterLink>
 				</li>
@@ -35,13 +35,6 @@
 import {
 	defineComponent,
 } from 'vue'
-import {
-	SportsEsportsRound,
-	GroupRound,
-	AmpStoriesRound,
-	LogOutRound,
-	ManageAccountsRound
-} from '@vicons/material'
 
 import { HeaderMenuOption } from '@/types'
 import MenuItem from './parts/MenuItem.vue'
@@ -65,19 +58,19 @@ export default defineComponent({
 				{
 					key: 'games',
 					label: 'Games',
-					icon: SportsEsportsRound,
+					icon: 'mdi-controller',
 					link: '#',
 				},
 				{
 					key: 'players',
 					label: 'Players',
-					icon: GroupRound,
+					icon: 'mdi-controller',
 					link: '#'
 				},
 				{
 					key: 'sessions',
 					label: 'Sessions',
-					icon: AmpStoriesRound,
+					icon: 'mdi-controller',
 					link: '#'
 				},
 			],
@@ -85,12 +78,12 @@ export default defineComponent({
 				{
 					key: 'profile',
 					label: 'Profile',
-					icon: ManageAccountsRound ,
+					icon: 'mdi-controller' ,
 					link: '#'
 				},
 				{
 					key: 'logout',
-					icon: LogOutRound,
+					icon: 'mdi-controller',
 					link: '#',
 				},
 			]
