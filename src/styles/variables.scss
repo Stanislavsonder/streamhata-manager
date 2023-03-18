@@ -1,9 +1,12 @@
 :root {
-	--white: #ffffff;
-	--background: #fdfcfc;
-
-	--hover-black: rgba(255, 255, 255, 0.125);
-	--hover-white: rgb(0 0 0 / 14%);
-
-	--inter: Inter, Avenir, Helvetica, Arial, sans-serif;
+	--background: rgb(var(--v-theme-background));
+	--surface: rgb(var(--v-theme-surface));
+	--primary: rgb(var(--v-theme-primary));
+	--primary-darken-1: rgb(var(--v-theme-primary-darken-1));
+	--secondary: rgb(var(--v-theme-secondary));
+	--secondary-darken-1: rgb(var(--v-theme-secondary-darken-1));
+	--error: rgb(var(--v-theme-error));
+	--info: rgb(var(--v-theme-info));
+	--success: rgb(var(--v-theme-success));
+	--warning: rgb(var(--v-theme-warning));
 }

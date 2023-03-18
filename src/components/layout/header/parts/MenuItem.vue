@@ -7,11 +7,7 @@
 			class="link"
 			:to="option.link"
 		>
-			<NIcon
-				class="link__icon"
-				size="48"
-				:component="option.icon"
-			/>
+			123
 			<span class="link__label">
 				{{ option.label }}
 			</span>
@@ -23,20 +19,19 @@
 import { defineComponent } from 'vue'
 import { PropType } from 'vue'
 import { RouterLink } from 'vue-router'
-import { NIcon } from 'naive-ui'
 import { HeaderMenuOption } from '@/types'
 
 export default defineComponent({
 	name: 'MenuItem',
 	components: {
-		NIcon, RouterLink
+		RouterLink
 	},
 	props: {
 		option: {
 			type: Object as PropType<HeaderMenuOption>,
 			required: true
 		},
-		isActive: { 
+		isActive: {
 			type: Boolean
 		}
 	}

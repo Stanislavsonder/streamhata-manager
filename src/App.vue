@@ -8,32 +8,30 @@
 			About
 		</router-link>
 	</nav>
-	<div>
-		<p v-if="!getGames">
-			Loading...
-		</p>
-		<ul v-else>
-			<li
-				v-for="game in getGames"
-				:key="game.title"
-			>
-				{{ game.title }}
-			</li>
-		</ul>
-	</div>
-
+	<v-card
+		class="card"
+	/>
 	<router-view />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import {
+	defineComponent
+} from 'vue'
 import gql from 'graphql-tag'
 import AppHeader from './components/layout/header/AppHeader.vue'
+import { useTheme } from 'vuetify'
 
 export default defineComponent({
 	name: 'App',
 	components: {
 		AppHeader
+	},
+	setup() {
+		const theme = useTheme()
+		return {
+			theme
+		}
 	},
 	data() {
 		return {
@@ -55,13 +53,14 @@ export default defineComponent({
 })
 </script>
 
-
-
-
-
-<style lang="scss" src="./styles/index.scss"/>
-
 <style lang="scss">
+.card {
+	width: 200px;
+	height: 200px;
+	margin: 100px;
+
+}
+
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -74,7 +73,7 @@ nav {
 
 	a {
 		font-weight: bold;
-		color: #2c3e50;
+		color: var(--background);
 
 		&.router-link-exact-active {
 			color: #42b983;
