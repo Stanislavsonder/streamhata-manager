@@ -28,7 +28,7 @@ import { HeaderMenuOption } from '@/types'
 export default defineComponent({
 	name: 'MenuItem',
 	components: {
-		NIcon, RouterLink
+		RouterLink
 	},
 	props: {
 		option: {
@@ -53,12 +53,12 @@ export default defineComponent({
 			width: 100%;
 			transform: scaleX(0);
 			height: 4px;
-			bottom: -4px;
+			bottom: -6px;
 			left: 0;
-			// todo: change bg color to var
-			background-color: #14ca88;
+			border-radius: 10px;
+			background-color: var(--detail);
 			transform-origin: bottom right;
-			transition: transform 0.25s ease-out;
+			transition: transform 0.5s ease-out;
 		}
 
 		&.active::after {

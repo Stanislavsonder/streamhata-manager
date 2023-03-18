@@ -73,7 +73,7 @@ nav {
 
 	a {
 		font-weight: bold;
-		color: var(--background);
+		color: var(--text);
 
 		&.router-link-exact-active {
 			color: #42b983;

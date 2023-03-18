@@ -18,11 +18,16 @@
 						class="link"
 						to="#"
 					>
-						<!-- todo: change color to use var ? -->
 						<v-btn
-							icon="mdi-account-circle"
-							color="grey-darken-3"
-						/>
+							color="text"
+							variant="plain"
+							icon=""
+						>
+							<v-icon
+								size="40"
+								icon="mdi-account-circle"
+							/>
+						</v-btn>
 					</RouterLink>
 				</li>
 				<li
@@ -32,11 +37,16 @@
 						class="link"
 						to="#"
 					>
-						<!-- todo: change color to use var ? -->
 						<v-btn
-							icon="mdi-logout"
-							color="red-darken-4"
-						/>
+							icon=""
+							color="error"
+							variant="plain"
+						>
+							<v-icon
+								size="40"
+								icon="mdi-exit-to-app"
+							/>
+						</v-btn>
 					</RouterLink>
 				</li>
 			</ul>
@@ -82,7 +92,7 @@ export default defineComponent({
 				{
 					key: 'sessions',
 					label: 'Sessions',
-					icon: 'mdi-card-multiple',
+					icon: 'mdi-television-shimmer',
 					link: '#'
 				},
 			]
@@ -99,7 +109,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .header {
 	// todo: change to var
-	background-color: #212121;
+	background-color: var(--surface);
 
 	&__nav {
 		display: flex;
