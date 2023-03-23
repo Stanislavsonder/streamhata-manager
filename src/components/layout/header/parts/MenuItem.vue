@@ -13,7 +13,7 @@
 				:icon="option.icon"
 			/>
 			<span class="link__label">
-				{{ option.label }}
+				{{ $t(option.label) }}
 			</span>
 		</RouterLink>
 	</li>
@@ -82,6 +82,7 @@ export default defineComponent({
 
 			&__label {
 				margin-left: 8px;
+				font-weight: 400;
 			}
 		}
 	}

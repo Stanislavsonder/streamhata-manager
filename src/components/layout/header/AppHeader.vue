@@ -79,19 +79,19 @@ export default defineComponent({
 			menuOptions: [
 				{
 					key: 'games',
-					label: 'Games',
+					label: 'header-menu__games',
 					icon: 'mdi-controller',
 					link: '#',
 				},
 				{
 					key: 'players',
-					label: 'Players',
+					label: 'header-menu__players',
 					icon: 'mdi-account-group',
 					link: '#'
 				},
 				{
 					key: 'sessions',
-					label: 'Sessions',
+					label: 'header-menu__sessions',
 					icon: 'mdi-television-shimmer',
 					link: '#'
 				},

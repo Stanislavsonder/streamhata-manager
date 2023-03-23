@@ -1,3 +1,5 @@
 {
-  "test-string": "This is english language."
+  "header-menu__games": "Games",
+  "header-menu__players": "Players",
+  "header-menu__sessions": "Sessions"
 }
