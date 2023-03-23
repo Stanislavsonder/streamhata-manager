@@ -23,7 +23,7 @@
       "@constants": ["src/utils/constants.ts"],
       "@pages/*":  ["src/pages/*"],
       "@services/*":  ["src/services/*"],
-      "@types": ["src/types/index.ts"]
+      "@types": ["src/types.ts"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
