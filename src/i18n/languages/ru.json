@@ -1,5 +1,6 @@
 {
   "header-menu__games": "Игры",
   "header-menu__players": "Игроки",
-  "header-menu__sessions": "Сессии"
+  "header-menu__sessions": "Сессии",
+  "hours": "ч"
 }

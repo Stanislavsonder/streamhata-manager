@@ -1,16 +1,6 @@
 <template>
 	<AppHeader />
-	<nav>
-		<router-link to="/">
-			Home
-		</router-link> |
-		<router-link to="/about">
-			About
-		</router-link>
-	</nav>
-	<v-card
-		class="card"
-	/>
+	<GameCard />
 	<router-view />
 </template>
 
@@ -19,13 +9,17 @@ import {
 	defineComponent
 } from 'vue'
 import gql from 'graphql-tag'
+
+// todo: resolve issue with aliases
 import AppHeader from './components/layout/header/AppHeader.vue'
+import GameCard from './components/game-card/GameCard.vue'
 import { useTheme } from 'vuetify'
 
 export default defineComponent({
 	name: 'App',
 	components: {
-		AppHeader
+		AppHeader,
+		GameCard
 	},
 	setup() {
 		const theme = useTheme()

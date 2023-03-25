@@ -1,5 +1,6 @@
 {
   "header-menu__games": "Games",
   "header-menu__players": "Players",
-  "header-menu__sessions": "Sessions"
+  "header-menu__sessions": "Sessions",
+  "hours": "h"
 }
