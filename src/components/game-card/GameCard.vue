@@ -1,22 +1,30 @@
 <template>
-	<div
+	<article
 		class="game-card"
 	>
-		<div class="game-card__platforms">
-			<v-icon
+		<ul class="game-card__platforms">
+			<li
 				v-for="platform in game.platforms.slice(0, 3)"
 				:key="platform"
-				size="24"
-				:icon="platform"
-				class="platform-icon"
-			/>
-		</div>
+			>
+				<v-icon
+					size="24"
+					:icon="platform"
+					class="platform-icon"
+				/>
+			</li>
+		</ul>
 		<div class="game-card__rarity" />
 
 		<div class="game-card__content">
-			<span class="release-date">{{ formattedDate }}</span>
+			<time
+				class="release-date"
+				:datetime="formattedDate.toString()"
+			>{{ formattedDate }}</time>
 			<div class="title-wrapper">
-				<span class="title">{{ game.title }}</span>
+				<h3 class="title">
+					{{ game.title }}
+				</h3>
 				<div class="details">
 					<div class="details__item">
 						{{ game.duration }} {{ $t('hours') }}
@@ -45,14 +53,14 @@
 					{{ tag }}
 				</div>
 				<div
-					v-if="isShowMoreVisible"
+					v-if="moreTags"
 					class="more"
 				>
 					+{{ moreTags }} more
 				</div>
 			</div>
 		</div>
-	</div>
+	</article>
 </template>
 
 <script lang="ts">
@@ -86,10 +94,6 @@ export default defineComponent({
 	},
 
 	computed: {
-		RARITY_ARRAY(): Array<string> {
-			return RARITY_ARRAY
-		},
-
 		backgroundImage(): string {
 			return `url(${this.game.imageSource})`
 		},
@@ -101,10 +105,6 @@ export default defineComponent({
 
 		formattedDate(): number {
 			return this.game.releaseDate.getFullYear()
-		},
-
-		isShowMoreVisible(): boolean {
-			return this.game.tags.length > 2
 		},
 
 		moreTags(): number {
@@ -168,12 +168,11 @@ export default defineComponent({
 			justify-content: space-between;
 
 			.title {
-				text-transform: uppercase;
 				text-align: start;
 				font-size: 24px;
 				font-weight: 700;
 				line-height: 28px;
-				max-width: 232px;
+				max-width: 75%;
 			}
 
 			.details {

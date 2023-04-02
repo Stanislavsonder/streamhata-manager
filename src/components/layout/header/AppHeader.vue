@@ -12,7 +12,7 @@
 			</ul>
 			<ul class="account-options">
 				<li
-					class="account-options__item account"
+					class="account-options__item"
 				>
 					<RouterLink
 						class="link"
@@ -31,7 +31,7 @@
 					</RouterLink>
 				</li>
 				<li
-					class="account-options__item logout"
+					class="account-options__item"
 				>
 					<RouterLink
 						class="link"
