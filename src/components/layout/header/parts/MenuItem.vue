@@ -7,9 +7,13 @@
 			class="link"
 			:to="option.link"
 		>
-			123
+			<v-icon
+				class="link__icon"
+				size="48"
+				:icon="option.icon"
+			/>
 			<span class="link__label">
-				{{ option.label }}
+				{{ $t(option.label) }}
 			</span>
 		</RouterLink>
 	</li>
@@ -49,11 +53,12 @@ export default defineComponent({
 			width: 100%;
 			transform: scaleX(0);
 			height: 4px;
-			bottom: -4px;
+			bottom: -6px;
 			left: 0;
-			background-color: #14ca88;
+			border-radius: 10px;
+			background-color: var(--detail);
 			transform-origin: bottom right;
-			transition: transform 0.25s ease-out;
+			transition: transform 0.5s ease-out;
 		}
 
 		&.active::after {
@@ -77,6 +82,7 @@ export default defineComponent({
 
 			&__label {
 				margin-left: 8px;
+				font-weight: 400;
 			}
 		}
 	}

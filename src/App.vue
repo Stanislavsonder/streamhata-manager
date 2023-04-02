@@ -1,16 +1,6 @@
 <template>
 	<AppHeader />
-	<nav>
-		<router-link to="/">
-			Home
-		</router-link> |
-		<router-link to="/about">
-			About
-		</router-link>
-	</nav>
-	<v-card
-		class="card"
-	/>
+	<GameCard />
 	<router-view />
 </template>
 
@@ -19,13 +9,17 @@ import {
 	defineComponent
 } from 'vue'
 import gql from 'graphql-tag'
+
+// todo: resolve issue with aliases
 import AppHeader from './components/layout/header/AppHeader.vue'
+import GameCard from './components/game-card/GameCard.vue'
 import { useTheme } from 'vuetify'
 
 export default defineComponent({
 	name: 'App',
 	components: {
-		AppHeader
+		AppHeader,
+		GameCard
 	},
 	setup() {
 		const theme = useTheme()
@@ -54,15 +48,16 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
 .card {
 	width: 200px;
 	height: 200px;
 	margin: 100px;
-
 }
 
 #app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
+	font-family: 'Chakra Petch', Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
@@ -73,7 +68,7 @@ nav {
 
 	a {
 		font-weight: bold;
-		color: var(--background);
+		color: var(--text);
 
 		&.router-link-exact-active {
 			color: #42b983;

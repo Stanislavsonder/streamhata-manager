@@ -10,20 +10,43 @@
 					@click="changeTab(option.key)"
 				/>
 			</ul>
-			<ul class="account-menu">
+			<ul class="account-options">
 				<li
-					class="account-menu__item account"
-					v-for="option in accountOptions"
-					:key="option.key"
+					class="account-options__item"
 				>
 					<RouterLink
 						class="link"
 						to="#"
 					>
-						<NIcon
-							size="48"
-							:component="option.icon"
-						/>
+						<v-btn
+							color="text"
+							variant="plain"
+							icon=""
+						>
+							<v-icon
+								size="40"
+								icon="mdi-account-circle"
+							/>
+						</v-btn>
+					</RouterLink>
+				</li>
+				<li
+					class="account-options__item"
+				>
+					<RouterLink
+						class="link"
+						to="#"
+					>
+						<v-btn
+							icon=""
+							color="error"
+							variant="plain"
+						>
+							<v-icon
+								size="40"
+								icon="mdi-exit-to-app"
+							/>
+						</v-btn>
 					</RouterLink>
 				</li>
 			</ul>
@@ -35,20 +58,12 @@
 import {
 	defineComponent,
 } from 'vue'
-import {
-	SportsEsportsRound,
-	GroupRound,
-	AmpStoriesRound,
-	LogOutRound,
-	ManageAccountsRound
-} from '@vicons/material'
 
 import { HeaderMenuOption } from '@/types'
 import MenuItem from './parts/MenuItem.vue'
 
 interface Data {
-	menuOptions: HeaderMenuOption[],
-	accountOptions: HeaderMenuOption[],
+	menuOptions: HeaderMenuOption[]
 	activeOptionKey: string
 }
 
@@ -64,34 +79,21 @@ export default defineComponent({
 			menuOptions: [
 				{
 					key: 'games',
-					label: 'Games',
-					icon: SportsEsportsRound,
+					label: 'header-menu__games',
+					icon: 'mdi-controller',
 					link: '#',
 				},
 				{
 					key: 'players',
-					label: 'Players',
-					icon: GroupRound,
+					label: 'header-menu__players',
+					icon: 'mdi-account-group',
 					link: '#'
 				},
 				{
 					key: 'sessions',
-					label: 'Sessions',
-					icon: AmpStoriesRound,
+					label: 'header-menu__sessions',
+					icon: 'mdi-television-shimmer',
 					link: '#'
-				},
-			],
-			accountOptions: [
-				{
-					key: 'profile',
-					label: 'Profile',
-					icon: ManageAccountsRound ,
-					link: '#'
-				},
-				{
-					key: 'logout',
-					icon: LogOutRound,
-					link: '#',
 				},
 			]
 		}
@@ -106,27 +108,32 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .header {
+	// todo: change to var
+	background-color: var(--surface);
+
 	&__nav {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		padding: 16px 32px;
+		padding: 16px;
 	}
 }
 
-.main-menu, .account-menu {
+.main-menu, .account-options {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
 
-.account-menu {
+.account-options {
 	&__item {
-		padding: 0 8px;
-
 		&:not(:last-child) {
 			margin-right: 20px;
 		}
+	}
+	
+	.link {
+		text-decoration: none;
 	}
 }
 </style>
