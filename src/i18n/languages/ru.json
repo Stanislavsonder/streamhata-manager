@@ -1,6 +1,14 @@
 {
-  "header-menu__games": "Игры",
-  "header-menu__players": "Игроки",
-  "header-menu__sessions": "Сессии",
-  "hours": "ч"
+	"header-menu__games": "Игры",
+	"header-menu__players": "Игроки",
+	"header-menu__sessions": "Сессии",
+	"hours": "ч",
+  	"test-string": "Это русский язык.",
+	"rarity__no-rank": "Без ранга",
+	"rarity__trash": "Мусор",
+	"rarity__common": "Обычная",
+	"rarity__good": "Хорошая",
+	"rarity__great": "Отличная",
+	"rarity__masterpiece": "Шедевр",
+	"rarity__goty": "GOTY"
 }

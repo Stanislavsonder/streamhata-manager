@@ -65,7 +65,7 @@
 
 <script lang="ts">
 import {
-	Rarity, Tag 
+	Rarity, Tag
 } from '@/types'
 import { defineComponent } from 'vue'
 import { RARITY_ARRAY } from '../../utils/constants'
@@ -80,9 +80,9 @@ export default defineComponent({
 				title: 'Death Stranding Director\'s Cut',
 				releaseDate: new Date(2012, 7, 23),
 				imageSource: 'https://m.media-amazon.com/images/M/MV5BZWFjMmY2NTEtNjAzNi00OTZkLWJiOTMtNWZkZDk4NzZhZjJlXkEyXkFqcGdeQXVyMTI0MzA4NTgw._V1_.jpg',
-				tags: [Tag['For Adults'],
-					Tag.Arcade,
-					Tag.Action],
+				tags: [Tag['for adults'],
+					Tag.arcade,
+					Tag.adventure],
 				platforms: ['mdi-desktop-classic',
 					'mdi-sony-playstation',
 					'mdi-microsoft-xbox'],
@@ -198,7 +198,7 @@ export default defineComponent({
 			margin-top: 8px;
 			font-size: 12px;
 
-			&__item {				
+			&__item {
 				padding: 4px 8px;
 				margin-right: 8px;
 				border-radius: 8px;
