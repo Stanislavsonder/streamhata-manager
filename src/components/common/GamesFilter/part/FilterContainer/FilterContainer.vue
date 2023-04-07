@@ -72,7 +72,6 @@ export default defineComponent({
 	},
 	methods: {
 		clear() {
-			console.log(this.defaultValue)
 			this.$emit('update:value', copy(this.defaultValue))
 		}
 	}
