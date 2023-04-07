@@ -9,7 +9,7 @@
 				v-if="typeof exclude !== 'undefined'"
 				class="filter-container__exclude"
 				color="primary"
-				label="Exclude"
+				:label="$t('exclude')"
 				density="compact"
 				hide-details
 				inline
@@ -21,7 +21,7 @@
 				variant="text"
 				@click="clear"
 			>
-				Clear
+				{{ $t('clear') }}
 			</v-btn>
 		</v-card-title>
 		<v-card-item>

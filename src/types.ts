@@ -137,12 +137,12 @@ export type Game = {
 
 
 
-type ExcludeRange<T> = {
+type ExcludableRange<T> = {
 	value: [T, T]
 	exclude: boolean
 }
 
-type Exclude<T> = {
+type Excludable<T> = {
 	value: T
 	exclude: boolean
 }
@@ -156,13 +156,13 @@ export enum ImageExisting {
 export type Filter = {
 	imageSource: {
 		exist: ImageExisting
-		aspectRatio: ExcludeRange<number>
-		quality: ExcludeRange<number>
+		aspectRatio: ExcludableRange<number>
+		quality: ExcludableRange<number>
 	}
-	releaseDate: ExcludeRange<number>
-	score: ExcludeRange<number>
-	duration: ExcludeRange<number>
-	tags: Exclude<string[]>
-	platforms: Exclude<string[]>
-	rarity: Exclude<Rarity[]>
+	releaseDate: ExcludableRange<number>
+	score: ExcludableRange<number>
+	duration: ExcludableRange<number>
+	tags: Excludable<string[]>
+	platforms: Excludable<string[]>
+	rarity: Excludable<Rarity[]>
 }

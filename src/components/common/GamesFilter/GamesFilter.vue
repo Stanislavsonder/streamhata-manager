@@ -1,11 +1,12 @@
 <template>
 	<v-card class="filters-container">
 		<v-card-title class="filters-container__title text-h4">
-			<h3>Filters</h3>
+			<h3>{{ $t('filters') }}</h3>
 		</v-card-title>
 
+		<!-- Release date -->
 		<FilterContainer
-			title="Release date"
+			:title="$t('release-date')"
 			:default-value="EMPTY_FILTER.releaseDate"
 			v-model:value="filters.releaseDate"
 			v-model:exclude="filters.releaseDate.exclude"
@@ -18,8 +19,9 @@
 			/>
 		</FilterContainer>
 
+		<!-- Rarity -->
 		<FilterContainer
-			title="Rarity"
+			:title="$t('rarity')"
 			:default-value="EMPTY_FILTER.rarity"
 			v-model:value="filters.rarity"
 			v-model:exclude="filters.rarity.exclude"
@@ -45,8 +47,9 @@
 			</v-btn-toggle>
 		</FilterContainer>
 
+		<!-- Score -->
 		<FilterContainer
-			title="Rarity"
+			:title="$t('score')"
 			:default-value="EMPTY_FILTER.score"
 			v-model:value="filters.score"
 			v-model:exclude="filters.score.exclude"
@@ -59,8 +62,9 @@
 			/>
 		</FilterContainer>
 
+		<!-- Duration -->
 		<FilterContainer
-			title="Duration"
+			:title="$t('duration')"
 			:default-value="EMPTY_FILTER.duration"
 			v-model:value="filters.duration"
 			v-model:exclude="filters.duration.exclude"
@@ -73,15 +77,16 @@
 			/>
 		</FilterContainer>
 
+		<!-- Tags -->
 		<FilterContainer
-			title="Tags"
+			:title="$t('tags')"
 			:default-value="EMPTY_FILTER.tags"
 			v-model:value="filters.tags"
 			v-model:exclude="filters.tags.exclude"
 		>
 			<v-autocomplete
 				v-model="filters.tags.value"
-				label="Select tags"
+				:label="$t('select-tags')"
 				:items="tags"
 				variant="outlined"
 				single-line
@@ -91,15 +96,16 @@
 			/>
 		</FilterContainer>
 
+		<!-- Platforms -->
 		<FilterContainer
-			title="Platforms"
+			:title="$t('platforms')"
 			:default-value="EMPTY_FILTER.platforms"
 			v-model:value="filters.platforms"
 			v-model:exclude="filters.platforms.exclude"
 		>
 			<v-autocomplete
 				v-model="filters.platforms.value"
-				label="Select platforms"
+				:label="$t('select-platforms')"
 				chips
 				variant="outlined"
 				single-line
@@ -109,8 +115,9 @@
 			/>
 		</FilterContainer>
 
+		<!-- Image -->
 		<FilterContainer
-			title="Platforms"
+			:title="$t('image')"
 			:default-value="EMPTY_FILTER.imageSource"
 			v-model:value="filters.imageSource"
 		>
@@ -122,83 +129,75 @@
 					density="compact"
 				>
 					<v-btn>
-						Any
+						{{ $t('any') }}
 					</v-btn>
 					<v-btn>
-						Exist
+						{{ $t('with') }}
 					</v-btn>
 					<v-btn>
-						Not Exist
+						{{ $t('without') }}
 					</v-btn>
 				</v-btn-toggle>
 			</v-card-item>
 			<v-card-item class="filter__image-section">
 				<v-card-title class="filter__title text-h6">
 					<h6>
-						Quality
+						{{ $t('quality') }}
 					</h6>
 					<v-switch
 						class="filter__exclude"
 						inline
 						hide-details
 						density="compact"
-						label="Exclude"
+						:label="$t('exclude')"
 						color="primary"
 						v-model="filters.imageSource.quality.exclude"
 					/>
 				</v-card-title>
-				<v-range-slider
-					class="filter__slider"
-					:min="EMPTY_FILTER.imageSource.quality[0]"
-					:max="EMPTY_FILTER.imageSource.quality[1]"
-					thumb-label
-					step="0.1"
-					show-ticks="always"
-					v-model="filters.imageSource.quality"
+				<RangeFilter
+					v-model="filters.imageSource.quality.value"
+					:min="EMPTY_FILTER.imageSource.quality.value[0]"
+					:max="EMPTY_FILTER.imageSource.quality.value[1]"
+					:step="0.1"
 				/>
 			</v-card-item>
 			<v-card-item class="filter__image-section">
 				<v-card-title class="filter__title text-h6">
 					<h6>
-						Aspect ratio
+						{{ $t('aspect-ratio') }}
 					</h6>
 					<v-switch
 						class="filter__exclude"
 						inline
 						hide-details
 						density="compact"
-						label="Exclude"
+						:label="$t('exclude')"
 						color="primary"
 						v-model="filters.imageSource.aspectRatio.exclude"
 					/>
 				</v-card-title>
-
-				<v-range-slider
-					class="filter__slider"
-					:min="EMPTY_FILTER.imageSource.aspectRatio[0]"
-					:max="EMPTY_FILTER.imageSource.aspectRatio[1]"
-					thumb-label
-					step="0.1"
-					show-ticks="always"
-					v-model="filters.imageSource.aspectRatio"
+				<RangeFilter
+					v-model="filters.imageSource.aspectRatio.value"
+					:min="EMPTY_FILTER.imageSource.aspectRatio.value[0]"
+					:max="EMPTY_FILTER.imageSource.aspectRatio.value[1]"
+					:step="0.1"
 				/>
 			</v-card-item>
 		</FilterContainer>
-
 
 		<v-card-actions class="filters-container__buttons">
 			<v-btn
 				@click="clearAll"
 				variant="text"
 			>
-				Clear all
+				{{ $t('clear-all') }}
 			</v-btn>
 			<v-btn
 				variant="tonal"
 				color="primary"
 				@click="applyFilters"
 			>
-				Apply
+				{{ $t('apply') }}
 			</v-btn>
 		</v-card-actions>
 	</v-card>
@@ -296,14 +295,5 @@ export default defineComponent({
 			height: 24px;
 		}
 	}
-}
-</style>
-
-
-<style lang="scss">
-// Fix for sliders
-.v-slider-thumb {
-	left: var(--v-slider-thumb-position)!important;
-	transform: translate(-50%, -50%)!important;
 }
 </style>

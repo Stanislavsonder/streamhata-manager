@@ -3,14 +3,15 @@
 		<v-text-field
 			type="number"
 			variant="outlined"
-			v-model="tmpValue[0]"
+			:model-value="modelValue[0]"
 			:min="min"
-			:max="Math.min(tmpValue[1], max)"
+			:max="Math.min(modelValue[1], max)"
 			:step="step"
-			prefix="From"
-			label="From"
+			:prefix="$t('from')"
+			:label="$t('from')"
 			density="compact"
 			hide-details
+			@change="e => update(e.target.value, modelValue[1])"
 			single-line
 		/>
 		<span class="range-filter__separator">
@@ -19,28 +20,18 @@
 		<v-text-field
 			type="number"
 			variant="outlined"
-			v-model="tmpValue[1]"
-			:min="Math.max(min, tmpValue[0])"
+			:model-value="modelValue[1]"
+			:min="Math.max(min, modelValue[0])"
 			:max="max"
 			:step="step"
-			prefix="To"
-			label="To"
+			:prefix="$t('to')"
+			:label="$t('to')"
 			density="compact"
 			hide-details
+			@change="e => update(modelValue[0], e.target.value)"
 			single-line
 		/>
 	</div>
-	<v-range-slider
-		class="range-filter__slider"
-		:model-value="[
-			tmpValue[0], tmpValue[1]
-		]"
-		:step="step"
-		:min="min"
-		:max="max"
-		show-ticks="always"
-		@change="value => tmpValue = value"
-	/>
 </template>
 
 <script lang="ts">
@@ -68,25 +59,18 @@ export default defineComponent({
 			default: 1
 		},
 		modelValue: {
-			type: Object,
+			type: Object as PropType<[number, number]>,
 			required: true
 		}
 	},
-	data() {
-		return {
-			tmpValue: this.modelValue || [
-				this.min,
-				this.max
-			]
+	methods: {
+		update(a: string | number, b: string | number) {
+			this.$emit('update:modelValue', [
+				Number(a),
+				Number(b)
+			])
 		}
-	},
-	watch: {
-		tmpValue(value) {
-			console.log(this.tmpValue)
-			this.$emit('update:modelValue', [value[0],
-				value[1]])
-		}
-	},
+	}
 })
 </script>
 
