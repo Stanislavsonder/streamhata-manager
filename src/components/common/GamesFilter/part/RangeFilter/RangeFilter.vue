@@ -5,7 +5,7 @@
 			variant="outlined"
 			v-model="tmpValue[0]"
 			:min="min"
-			:max="Math.min(tmpValue[1], max as number)"
+			:max="Math.min(tmpValue[1], max)"
 			:step="step"
 			prefix="From"
 			label="From"
@@ -20,7 +20,7 @@
 			type="number"
 			variant="outlined"
 			v-model="tmpValue[1]"
-			:min="Math.max(min as number, tmpValue[0])"
+			:min="Math.max(min, tmpValue[0])"
 			:max="max"
 			:step="step"
 			prefix="To"
@@ -35,9 +35,9 @@
 		:model-value="[
 			tmpValue[0], tmpValue[1]
 		]"
-		:step="step as number"
-		:min="min as number"
-		:max="max as number"
+		:step="step"
+		:min="min"
+		:max="max"
 		show-ticks="always"
 		@change="value => tmpValue = value"
 	/>
@@ -45,7 +45,7 @@
 
 <script lang="ts">
 import {
-	defineComponent
+	defineComponent, PropType
 } from 'vue'
 
 export default defineComponent({
@@ -53,15 +53,18 @@ export default defineComponent({
 	emits: ['update:modelValue'],
 	props: {
 		min: {
-			type: Number,
+			type: Number as PropType<number>,
+			required: true,
 			default: 0
 		},
 		max: {
 			type: Number,
-			default: 100
+			required: true,
+			default: 100,
 		},
 		step: {
 			type: Number,
+			required: true,
 			default: 1
 		},
 		modelValue: {
@@ -71,10 +74,7 @@ export default defineComponent({
 	},
 	data() {
 		return {
-			tmpValue: this.modelValue? [
-				this.modelValue[0],
-				this.modelValue[1]
-			] : [
+			tmpValue: this.modelValue || [
 				this.min,
 				this.max
 			]
