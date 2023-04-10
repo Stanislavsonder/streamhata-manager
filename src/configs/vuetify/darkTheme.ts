@@ -1,3 +1,4 @@
+import { rarityColorsVuetify } from '@constants'
 
 const darkTheme = {
 	dark: true,
@@ -13,7 +14,8 @@ const darkTheme = {
 		info: '#2196F3',
 		success: '#4CAF50',
 		warning: '#FB8C00',
-		detail: '#FB2576'
+		detail: '#FB2576',
+		...rarityColorsVuetify
 	}
 }
 

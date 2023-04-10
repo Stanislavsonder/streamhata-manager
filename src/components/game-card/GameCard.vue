@@ -66,7 +66,8 @@
 <script lang="ts">
 import {
 	Game,
-	Rarity, Tag 
+	Rarity, 
+	Tag 
 } from '@/types'
 import {
 	PropType, defineComponent 
@@ -200,7 +201,7 @@ export default defineComponent({
 			margin-top: 8px;
 			font-size: 12px;
 
-			&__item {				
+			&__item {
 				padding: 4px 8px;
 				margin-right: 8px;
 				border-radius: 8px;

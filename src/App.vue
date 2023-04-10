@@ -1,6 +1,12 @@
 <template>
 	<AppHeader />
 	<router-view />
+	<main>
+		<GamesFilter
+			:initial-filters="gameFilter"
+			@apply="log"
+		/>
+	</main>
 </template>
 
 <script lang="ts">
@@ -8,6 +14,7 @@ import {
 	defineComponent
 } from 'vue'
 import gql from 'graphql-tag'
+import GamesFilter from '@components/common/GamesFilter/GamesFilter.vue'
 
 // todo: resolve issue with aliases
 import AppHeader from '@components/layout/header/AppHeader.vue'
@@ -17,6 +24,7 @@ export default defineComponent({
 	name: 'App',
 	components: {
 		AppHeader,
+		GamesFilter
 	},
 	setup() {
 		const theme = useTheme()
@@ -26,7 +34,8 @@ export default defineComponent({
 	},
 	data() {
 		return {
-			getGames: undefined
+			getGames: undefined,
+			gameFilter: undefined
 		}
 	},
 	apollo: {
@@ -40,7 +49,12 @@ export default defineComponent({
 			},
 			loadingKey: 'loading...'
 		}
-	}
+	},
+	methods: {
+		log(value: any) {
+			console.log(value)
+		}
+	},
 })
 </script>
 
