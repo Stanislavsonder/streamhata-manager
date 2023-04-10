@@ -11,6 +11,11 @@
 				/>
 			</ul>
 			<ul class="account-options">
+				<li class="account-options__item">
+					<v-btn @click="$i18n.locale = $i18n.locale === 'en' ? 'ru': 'en'">
+						{{ $i18n.locale === 'en'? 'ru': 'en' }}
+					</v-btn>
+				</li>
 				<li
 					class="account-options__item"
 				>
@@ -131,7 +136,7 @@ export default defineComponent({
 			margin-right: 20px;
 		}
 	}
-	
+
 	.link {
 		text-decoration: none;
 	}
