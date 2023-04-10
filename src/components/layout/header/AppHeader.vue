@@ -81,7 +81,7 @@ export default defineComponent({
 					key: 'games',
 					label: 'header-menu__games',
 					icon: 'mdi-controller',
-					link: '#',
+					link: 'games',
 				},
 				{
 					key: 'players',

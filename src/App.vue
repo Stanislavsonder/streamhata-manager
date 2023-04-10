@@ -1,6 +1,5 @@
 <template>
 	<AppHeader />
-	<GameCard />
 	<router-view />
 </template>
 
@@ -11,15 +10,13 @@ import {
 import gql from 'graphql-tag'
 
 // todo: resolve issue with aliases
-import AppHeader from './components/layout/header/AppHeader.vue'
-import GameCard from './components/game-card/GameCard.vue'
+import AppHeader from '@components/layout/header/AppHeader.vue'
 import { useTheme } from 'vuetify'
 
 export default defineComponent({
 	name: 'App',
 	components: {
 		AppHeader,
-		GameCard
 	},
 	setup() {
 		const theme = useTheme()
@@ -70,9 +67,9 @@ nav {
 		font-weight: bold;
 		color: var(--text);
 
-		&.router-link-exact-active {
-			color: #42b983;
-		}
+		// &.router-link-exact-active {
+		// 	color: #42b983;
+		// }
 	}
 }
 </style>

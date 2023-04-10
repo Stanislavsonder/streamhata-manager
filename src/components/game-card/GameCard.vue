@@ -65,37 +65,28 @@
 
 <script lang="ts">
 import {
+	Game,
 	Rarity, Tag 
 } from '@/types'
-import { defineComponent } from 'vue'
+import {
+	PropType, defineComponent 
+} from 'vue'
 import { RARITY_ARRAY } from '../../utils/constants'
 
 export default defineComponent({
 	name: 'GameCard',
-	components: {
-	},
-	data() {
-		return {
-			game: {
-				title: 'Death Stranding Director\'s Cut',
-				releaseDate: new Date(2012, 7, 23),
-				imageSource: 'https://m.media-amazon.com/images/M/MV5BZWFjMmY2NTEtNjAzNi00OTZkLWJiOTMtNWZkZDk4NzZhZjJlXkEyXkFqcGdeQXVyMTI0MzA4NTgw._V1_.jpg',
-				tags: [Tag['For Adults'],
-					Tag.Arcade,
-					Tag.Action],
-				platforms: ['mdi-desktop-classic',
-					'mdi-sony-playstation',
-					'mdi-microsoft-xbox'],
-				rarity: Rarity.GOTY,
-				duration: 12,
-				score: 69
-			}
+	props: {
+		game: {
+			type: Object as PropType<Game>,
+			required: true
 		}
 	},
 
 	computed: {
 		backgroundImage(): string {
-			return `url(${this.game.imageSource})`
+			return this.game.imageSource 
+				? `url(${this.game.imageSource})` 
+				: 'url("../../../noimage.jpg")'
 		},
 
 		// todo: write util function to get rarity color
@@ -104,13 +95,13 @@ export default defineComponent({
 		},
 
 		formattedDate(): number {
-			return this.game.releaseDate.getFullYear()
+			return new Date(this.game.releaseDate).getFullYear()
 		},
 
 		moreTags(): number {
 			return this.game.tags.length - 2
 		}
-	}
+	},
 })
 </script>
 
@@ -122,10 +113,13 @@ export default defineComponent({
 	width: 320px;
 	height: 400px;
 	padding: 8px;
+	margin: 16px;
 	border-radius: 8px;
 	background-image: v-bind(backgroundImage);
 	background: linear-gradient(to top, #000000 20%, rgba(0, 0, 0, 0.2) 50%), v-bind(backgroundImage);
 	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 	// todo: add rarity vars to css
 	box-shadow: 0px 0px 4px #7440C9;
 
