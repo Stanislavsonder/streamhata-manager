@@ -27,7 +27,7 @@
 				</h3>
 				<div class="details">
 					<div class="details__item">
-						{{ game.duration }} {{ $t('hours') }}
+						{{ gameDuration }}
 						<v-icon
 							size="16"
 							icon="mdi-clock-time-four"
@@ -35,7 +35,7 @@
 						/>
 					</div>
 					<div class="details__item">
-						{{ game.score }}
+						{{ score }}
 						<v-icon
 							size="16"
 							icon="mdi-star"
@@ -100,6 +100,14 @@ export default defineComponent({
 
 		moreTags(): number {
 			return this.game.tags.length - 2
+		},
+
+		gameDuration(): string {
+			return this.game.duration ? this.game.duration + this.$t('hours') : 'ー'
+		},
+
+		score(): string | number {
+			return this.game.score || 'ー'
 		}
 	},
 })
