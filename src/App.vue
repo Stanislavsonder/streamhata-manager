@@ -1,46 +1,26 @@
 <template>
 	<AppHeader />
 	<router-view />
-	<main>
-		<GamesFilter
-			:initial-filters="gameFilter"
-			@apply="log"
-		/>
-	</main>
+	<ImageSearcher />
 </template>
 
 <script lang="ts">
 import {
 	defineComponent
 } from 'vue'
-import gql from 'graphql-tag'
-import GamesFilter from './components/common/GamesFilter/GamesFilter.vue'
-
 // todo: resolve issue with aliases
 import AppHeader from './components/layout/header/AppHeader.vue'
+import ImageSearcher from '@pages/ImageSearcher/ImageSearcher.vue'
 
 export default defineComponent({
 	name: 'App',
 	components: {
+		ImageSearcher,
 		AppHeader,
-		GamesFilter,
 	},
 	data() {
 		return {
-			getGames: undefined,
 			gameFilter: undefined
-		}
-	},
-	apollo: {
-		getGames: {
-			query() {
-				return gql`{
-					getGames(query: { limit: 1000 }) {
-						title
-					}
-				}`
-			},
-			loadingKey: 'loading...'
 		}
 	},
 	methods: {

@@ -133,6 +133,8 @@ export type Game = {
 	rarity: Rarity
 	duration: number
 	score: number
+	imageAspectRatio?: number
+	imageQuality?: number
 }
 
 

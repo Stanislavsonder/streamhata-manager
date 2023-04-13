@@ -6,9 +6,14 @@ module.exports = {
 		'plugin:vue/vue3-strongly-recommended',
 		'@vue/typescript/recommended',
 	],
+	globals: {
+		'gapi': 'readonly'
+	},
 	plugins: ['no-null'],
 	parserOptions: { ecmaVersion: 'latest', },
 	rules: {
+		'no-undef': 'off',
+		'vue/no-undef': 'off',
 		'no-null/no-null': 'error',
 		'no-console': 'warn',
 		'no-debugger': 'warn',
@@ -277,7 +282,7 @@ module.exports = {
 		// 	'warn',
 		// 	[
 		// 		{
-		// 			'blankLine': 'always', 'prev': '*', 'next': '*' 
+		// 			'blankLine': 'always', 'prev': '*', 'next': '*'
 		// 		}
 		// 	]
 		// ],
