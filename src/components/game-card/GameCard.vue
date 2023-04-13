@@ -4,16 +4,25 @@
 	>
 		<ul class="game-card__platforms">
 			<li
-				v-for="platform in game.platforms.slice(0, 3)"
-				:key="platform"
+				v-for="platformGroup in Object.keys(mergedPlatforms)"
+				:key="platformGroup"
 			>
-				<v-icon
-					size="24"
-					:icon="platform"
-					class="platform-icon"
-				/>
+				<div>
+					<v-icon
+						class="platform-icon"
+						size="24"
+						:icon="platformIcons[platformGroup as Platforms]"
+					/>
+					<v-tooltip
+						activator="parent"
+						location="top"
+					>
+						{{ generatePlatformTooltipText(mergedPlatforms[platformGroup as Platforms] || []) }}
+					</v-tooltip>
+				</div>
 			</li>
 		</ul>
+
 		<div class="game-card__rarity" />
 
 		<div class="game-card__content">
@@ -49,11 +58,12 @@
 					v-for="tag in game.tags.slice(0, 2)"
 					:key="tag"
 					class="tags__item"
+					:style="{ backgroundColor: getTagColor(tag)}"
 				>
 					{{ tag }}
 				</div>
 				<div
-					v-if="moreTags"
+					v-if="moreTags > 0"
 					class="more"
 				>
 					+{{ moreTags }} more
@@ -65,14 +75,17 @@
 
 <script lang="ts">
 import {
-	Game,
-	Rarity, 
-	Tag 
-} from '@/types'
-import {
 	PropType, defineComponent 
 } from 'vue'
-import { RARITY_ARRAY } from '../../utils/constants'
+import {
+	Game, MergedPlatforms, Platforms
+} from '@types'
+import {
+	PLATFORM_ICONS, RARITIES 
+} from '@constants'
+import {
+	getTagColor, mergePlatforms 
+} from '@utils/utils'
 
 export default defineComponent({
 	name: 'GameCard',
@@ -82,7 +95,6 @@ export default defineComponent({
 			required: true
 		}
 	},
-
 	computed: {
 		backgroundImage(): string {
 			return this.game.imageSource 
@@ -92,7 +104,7 @@ export default defineComponent({
 
 		// todo: write util function to get rarity color
 		rarityColor(): string {
-			return '#7440C9'
+			return `var(--rarity-${RARITIES[this.game.rarity]})`
 		},
 
 		formattedDate(): number {
@@ -109,6 +121,31 @@ export default defineComponent({
 
 		score(): string | number {
 			return this.game.score || 'ー'
+		},
+
+		mergedPlatforms(): MergedPlatforms {
+			return mergePlatforms(this.game.platforms)
+		},
+
+		platformIcons() {
+			return PLATFORM_ICONS
+		},
+
+		Platforms() {
+			return Platforms
+		}
+	},
+	methods: {
+		generatePlatformTooltipText(platforms: string[]): string {
+			let tooltipText = ''
+			platforms.forEach((item, index) => {
+				tooltipText = index !== platforms.length - 1 ? tooltipText + platforms[index] + ', ' : tooltipText + platforms[index]
+			})
+
+			return tooltipText
+		},
+		getTagColor(tag: string): string {
+			return getTagColor(tag)
 		}
 	},
 })
@@ -130,10 +167,11 @@ export default defineComponent({
 	background-position: center;
 	background-repeat: no-repeat;
 	// todo: add rarity vars to css
-	box-shadow: 0px 0px 4px #7440C9;
+	box-shadow: 0px 0px 4px v-bind(rarityColor);
 
 
 	&__platforms {
+		display: flex;
 		position: absolute;
 		top: 8px;
 		left: 8px;
