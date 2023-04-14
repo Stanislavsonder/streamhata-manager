@@ -115,6 +115,11 @@ export default defineComponent({
 .header {
 	// todo: change to var
 	background-color: var(--surface);
+	position: sticky;
+	top: 0;
+	z-index: 5;
+
+
 
 	&__nav {
 		display: flex;

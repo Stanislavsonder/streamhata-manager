@@ -23,7 +23,9 @@
 	"exclude": "Exclude",
 	"from": "From",
 	"to": "To",
+	"add": "Add",
 	"any": "Any",
+	"skip": "Skip",
 	"with": "With",
 	"without": "Without",
 	"quality": "Quality",
@@ -31,5 +33,10 @@
 	"clear-all": "Clear all",
 	"apply": "Apply",
 	"select-tags": "Select tags",
-	"select-platforms": "Select platforms"
+	"select-platforms": "Select platforms",
+	"image-searcher__title": "Select new image for a game",
+	"image-searcher__aspect-ratio-index": "Aspect ratio index",
+	"image-searcher__quality-index": "Quality index",
+	"image-searcher__add-manually": "Add URL manually",
+	"image-searcher__possible-images": "Possible images"
 }

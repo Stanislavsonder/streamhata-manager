@@ -5,6 +5,7 @@ query getGameWithLowQualityImage($skip: Float){
   getGameWithLowQualityImage(skip: $skip) {
     title
     imageSource
+	releaseDate		
     _id
   }
 }`
