@@ -85,6 +85,8 @@ export type Game = {
 	score: number
 }
 
+export type GameForCard = Omit<Game, 'developers' | 'description'>
+
 type ExcludableRange<T> = {
 	value: [T, T]
 	exclude: boolean

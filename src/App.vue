@@ -18,19 +18,12 @@ import GamesFilter from '@components/common/GamesFilter/GamesFilter.vue'
 
 // todo: resolve issue with aliases
 import AppHeader from '@components/layout/header/AppHeader.vue'
-import { useTheme } from 'vuetify'
 
 export default defineComponent({
 	name: 'App',
 	components: {
 		AppHeader,
 		GamesFilter
-	},
-	setup() {
-		const theme = useTheme()
-		return {
-			theme
-		}
 	},
 	data() {
 		return {
@@ -68,7 +61,7 @@ export default defineComponent({
 }
 
 #app {
-	font-family: 'Chakra Petch', Helvetica, Arial, sans-serif;
+	font-family: var(--default-font);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;

@@ -14,7 +14,7 @@ export function allEnumItems<T>(enumItem: T): T[]{
 }
 
 export function mergePlatforms(platforms: string[]): MergedPlatforms  {
-	const mergedPlatforms: MergedPlatforms = { ...PlatformGroupsTemplate }
+	const mergedPlatforms: MergedPlatforms = deepCopy(PlatformGroupsTemplate)
 
 	platforms.forEach((platform) => {
 		const matchedGroup = findMatchingGroup(platform)
@@ -55,4 +55,8 @@ export function getTagColor(tag: string): string {
 			.encode(tag)]
 			.reduce((a,b) => a + b) % tagColors.length
 	]
+}
+
+export function deepCopy<T>(obj: T): T {
+	return JSON.parse(JSON.stringify(obj))
 }

@@ -28,8 +28,8 @@
 		<div class="game-card__content">
 			<time
 				class="release-date"
-				:datetime="formattedDate.toString()"
-			>{{ formattedDate }}</time>
+				:datetime="releaseYear.toString()"
+			>{{ releaseYear }}</time>
 			<div class="title-wrapper">
 				<h3 class="title">
 					{{ game.title }}
@@ -78,7 +78,7 @@ import {
 	PropType, defineComponent 
 } from 'vue'
 import {
-	Game, MergedPlatforms, Platforms
+	Game, GameForCard, MergedPlatforms, Platforms
 } from '@types'
 import {
 	PLATFORM_ICONS, RARITIES 
@@ -91,23 +91,22 @@ export default defineComponent({
 	name: 'GameCard',
 	props: {
 		game: {
-			type: Object as PropType<Game>,
+			type: Object as PropType<GameForCard>,
 			required: true
 		}
 	},
+	data() {
+		return {
+			backgroundImage: ''
+		}
+	},
 	computed: {
-		backgroundImage(): string {
-			return this.game.imageSource 
-				? `url(${this.game.imageSource})` 
-				: 'url("../../../noimage.jpg")'
-		},
-
 		// todo: write util function to get rarity color
 		rarityColor(): string {
 			return `var(--rarity-${RARITIES[this.game.rarity]})`
 		},
 
-		formattedDate(): number {
+		releaseYear(): number {
 			return new Date(this.game.releaseDate).getFullYear()
 		},
 
@@ -135,17 +134,33 @@ export default defineComponent({
 			return Platforms
 		}
 	},
+	created() {
+		this.checkImageExistance()
+	},
 	methods: {
 		generatePlatformTooltipText(platforms: string[]): string {
-			let tooltipText = ''
-			platforms.forEach((item, index) => {
-				tooltipText = index !== platforms.length - 1 ? tooltipText + platforms[index] + ', ' : tooltipText + platforms[index]
-			})
-
-			return tooltipText
+			return platforms.join(', ')
 		},
 		getTagColor(tag: string): string {
 			return getTagColor(tag)
+		},
+		checkImageExistance() {
+			if (!this.game.imageSource) {
+				this.backgroundImage = 'url("../../../noimage.jpg")'
+				return
+			}
+
+			const img = new Image()
+
+			img.onload = () => {
+				this.backgroundImage = `url(${this.game.imageSource})` 
+			}
+		
+			img.onerror = () => {
+				this.backgroundImage = 'url("../../../noimage.jpg")'
+			}
+
+			img.src = this.game.imageSource
 		}
 	},
 })
@@ -243,7 +258,6 @@ export default defineComponent({
 				padding: 4px 8px;
 				margin-right: 8px;
 				border-radius: 8px;
-				background-color: #2D5B37;
 				font-weight: 700;
 				line-height: 16px;
 			}

@@ -1,7 +1,7 @@
 import {
 	Filter, ImageExisting, Platforms
 } from '@types'
-import { removePlatformGroupsValues } from './utils'
+import { deepCopy, removePlatformGroupsValues } from './utils'
 
 export const RARITIES = [
 	'no-rank',
@@ -57,7 +57,7 @@ export const PlatformGroups = {
 	]
 }
 
-export const PlatformGroupsTemplate = removePlatformGroupsValues({ ...PlatformGroups })
+export const PlatformGroupsTemplate = removePlatformGroupsValues(deepCopy(PlatformGroups))
 
 // TODO: find icons to replace deprecated
 export const PLATFORM_ICONS = {
@@ -70,16 +70,16 @@ export const PLATFORM_ICONS = {
 }
 
 export const tagColors = [
-	'#664d00',
-	'#6e2a0c',
-	'#691312',
-	'#5d0933',
-	'#291938',
-	'#042d3a',
-	'#12403c',
-	'#475200',
-	'#c1121f',
-	'#415a77',
+	'#664d00CC',
+	'#6e2a0cCC',
+	'#691312CC',
+	'#5d0933CC',
+	'#291938CC',
+	'#042d3aCC',
+	'#12403cCC',
+	'#475200CC',
+	'#c1121fCC',
+	'#415a77CC',
 ]
 
 export const EMPTY_FILTER: Filter = {

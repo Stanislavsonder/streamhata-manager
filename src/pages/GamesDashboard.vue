@@ -10,25 +10,29 @@
 			>
 				Loading...
 			</div>
-			<div
+			<ul
 				v-else
 				class="cards"
 			>
-				<GameCard
+				<li
 					v-for="game in games"
-					:game="game"
-					:key="game.id"
-				/>
-			</div>
+					:key="game._id"
+				>
+					<GameCard
+						:game="game"
+					/>
+				</li>
+			</ul>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import gql from 'graphql-tag'
 
 import GameCard from '@components/game-card/GameCard.vue'
+import { GameForCard } from '@types'
+import GET_ALL_GAMES from '@/graphql/queries/GET_ALL_GAMES'
 
 const filterjson = JSON.stringify({
 	score: {
@@ -36,31 +40,23 @@ const filterjson = JSON.stringify({
 	}
 })
 
+interface Data {
+	games: GameForCard[]
+}
+
 export default defineComponent({
 	name: 'GamesDashboard',
 	components: {
 		GameCard
 	},
-	data() {
+	data(): Data {
 		return {
-			games: undefined as any
+			games: []
 		}
 	},
 	apollo: {
 		games: {
-			query: gql`query($filter: Any!) {
-					getGames(query: { limit: 100, filter: $filter }) {
-						_id
-						title
-						releaseDate
-						imageSource
-						tags
-						platforms
-						rarity
-						duration
-						score
-					}
-			}`,
+			query: GET_ALL_GAMES,
 			variables: {
 				filter: filterjson
 			},
