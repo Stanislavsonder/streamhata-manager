@@ -14,16 +14,16 @@ import {
 	defineComponent
 } from 'vue'
 import gql from 'graphql-tag'
-import GamesFilter from './components/common/GamesFilter/GamesFilter.vue'
+import GamesFilter from '@components/common/GamesFilter/GamesFilter.vue'
 
 // todo: resolve issue with aliases
-import AppHeader from './components/layout/header/AppHeader.vue'
+import AppHeader from '@components/layout/header/AppHeader.vue'
 
 export default defineComponent({
 	name: 'App',
 	components: {
 		AppHeader,
-		GamesFilter,
+		GamesFilter
 	},
 	data() {
 		return {
@@ -61,7 +61,7 @@ export default defineComponent({
 }
 
 #app {
-	font-family: 'Chakra Petch', Helvetica, Arial, sans-serif;
+	font-family: var(--default-font);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
@@ -74,9 +74,9 @@ nav {
 		font-weight: bold;
 		color: var(--text);
 
-		&.router-link-exact-active {
-			color: #42b983;
-		}
+		// &.router-link-exact-active {
+		// 	color: #42b983;
+		// }
 	}
 }
 </style>
