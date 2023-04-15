@@ -83,6 +83,8 @@ export type Game = {
 	rarity: Rarity
 	duration: number
 	score: number
+	imageAspectRatio?: number
+	imageQuality?: number
 }
 
 export type GameForCard = Omit<Game, 'developers' | 'description'>

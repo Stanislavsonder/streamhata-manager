@@ -2,6 +2,7 @@
 	"header-menu__games": "Игры",
 	"header-menu__players": "Игроки",
 	"header-menu__sessions": "Сессии",
+	"header-menu__image-searcher": "Поисковик изображений",
 	"hours": "ч",
   	"test-string": "Это русский язык.",
 	"rarity__no-rank": "Без ранга",
@@ -23,7 +24,9 @@
 	"exclude": "Исключить",
 	"from": "От",
 	"to": "До",
+	"add": "Добавить",
 	"any": "Любой",
+	"skip": "Пропустить",
 	"with": "С",
 	"without": "Без",
 	"quality": "Качество",
@@ -31,5 +34,10 @@
 	"clear-all": "Очистить всё",
 	"apply": "Применить",
 	"select-tags": "Выбрать тэги",
-	"select-platforms": "Выбрать платформы"
+	"select-platforms": "Выбрать платформы",
+	"image-searcher__title": "Выберите изображение для игры",
+	"image-searcher__aspect-ratio-index": "Индекс соотношения сторон",
+	"image-searcher__quality-index": "Индекс качества",
+	"image-searcher__add-manually": "Добавить ссылку вручную",
+	"image-searcher__possible-images": "Возможные изображения"
 }

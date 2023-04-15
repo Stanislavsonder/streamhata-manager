@@ -2,6 +2,7 @@ import {
 	createRouter, createWebHistory, RouteRecordRaw
 } from 'vue-router'
 import GamesDashboard from '@pages/GamesDashboard.vue'
+import ImageSearcher from '@pages/ImageSearcher/ImageSearcher.vue'
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -9,6 +10,9 @@ const routes: Array<RouteRecordRaw> = [
 	},
 	{
 		path: '/games', component: GamesDashboard
+	},
+	{
+		path: '/image-searcher', component: ImageSearcher
 	}
 ]
 

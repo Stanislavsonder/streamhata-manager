@@ -100,6 +100,12 @@ export default defineComponent({
 					icon: 'mdi-television-shimmer',
 					link: '#'
 				},
+				{
+					key: 'image-searcher',
+					label: 'header-menu__image-searcher',
+					icon: 'mdi-television-shimmer',
+					link: 'image-searcher'
+				}
 			]
 		}
 	},
@@ -115,6 +121,11 @@ export default defineComponent({
 .header {
 	// todo: change to var
 	background-color: var(--surface);
+	position: sticky;
+	top: 0;
+	z-index: 5;
+
+
 
 	&__nav {
 		display: flex;

@@ -3,6 +3,7 @@ import {
 } from '@apollo/client/core'
 import { createApolloProvider } from '@vue/apollo-option'
 
+
 const httpLink = createHttpLink({
 	uri: 'https://streamhata.xyz:2334/graphql',
 })
