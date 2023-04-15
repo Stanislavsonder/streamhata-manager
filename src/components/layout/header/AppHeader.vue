@@ -100,6 +100,12 @@ export default defineComponent({
 					icon: 'mdi-television-shimmer',
 					link: '#'
 				},
+				{
+					key: 'image-searcher',
+					label: 'header-menu__image-searcher',
+					icon: 'mdi-television-shimmer',
+					link: 'image-searcher'
+				}
 			]
 		}
 	},

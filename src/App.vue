@@ -24,8 +24,9 @@ export default defineComponent({
 html {
 	height: 100%;
 }
-* {
-	font-family: 'Chakra Petch', Helvetica, Arial, sans-serif;
+
+body > * {
+	font-family: var(--default-font);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -33,9 +34,6 @@ html {
 body {
 	height: 100%;
 	position: relative;
-	font-family: 'Chakra Petch', Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
 }
 
@@ -43,13 +41,6 @@ body {
 	width: 200px;
 	height: 200px;
 	margin: 100px;
-}
-
-#app {
-	font-family: var(--default-font);
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
 }
 
 nav {
