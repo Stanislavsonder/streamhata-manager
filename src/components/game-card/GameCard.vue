@@ -169,21 +169,27 @@ export default defineComponent({
 <style scoped lang="scss">
 .game-card {
 	position: relative;
+	user-select: none;
 	display: flex;
 	align-items: flex-end;
 	width: 320px;
 	height: 400px;
 	padding: 8px;
-	margin: 16px;
+	margin: 4px;
+	cursor: pointer;
 	border-radius: 8px;
 	background-image: v-bind(backgroundImage);
 	background: linear-gradient(to top, #000000 20%, rgba(0, 0, 0, 0.2) 50%), v-bind(backgroundImage);
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	// todo: add rarity vars to css
 	box-shadow: 0px 0px 4px v-bind(rarityColor);
+	transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
 
+	&:hover {
+		box-shadow: 0px 0px 40px v-bind(rarityColor);
+		transform: scale(1.03);
+	}
 
 	&__platforms {
 		display: flex;
@@ -229,6 +235,8 @@ export default defineComponent({
 				font-weight: 700;
 				line-height: 28px;
 				max-width: 75%;
+				user-select: text;
+				cursor: text;
 			}
 
 			.details {
@@ -266,6 +274,7 @@ export default defineComponent({
 				display: flex;
 				align-items: center;
 				font-weight: 300;
+				pointer-events: none;
 			}
 		}
 	}
