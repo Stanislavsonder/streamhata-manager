@@ -3,6 +3,7 @@ const path = require('path')
 
 
 module.exports = defineConfig({
+	publicPath: process.env.NODE_ENV === 'production' ? 'https://stanislavsonder.github.io/streamhata-manager/' : '/',
 	transpileDependencies: true,
 	css: {
 		loaderOptions: {

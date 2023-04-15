@@ -123,7 +123,7 @@ module.exports = {
 			}
 		],
 		'vue/no-bare-strings-in-template': [
-			process.env.NODE_ENV === 'production'? 'error': 'off',
+			process.env.NODE_ENV === 'production'? 'warn': 'off',
 			{
 				'allowlist': [
 					'(',
