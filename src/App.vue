@@ -1,32 +1,20 @@
 <template>
 	<AppHeader />
 	<router-view />
-	<ImageSearcher />
 </template>
 
 <script lang="ts">
 import {
 	defineComponent
 } from 'vue'
+
 // todo: resolve issue with aliases
-import AppHeader from './components/layout/header/AppHeader.vue'
-import ImageSearcher from '@pages/ImageSearcher/ImageSearcher.vue'
+import AppHeader from '@/components/layout/header/AppHeader.vue'
 
 export default defineComponent({
 	name: 'App',
 	components: {
-		ImageSearcher,
 		AppHeader,
-	},
-	data() {
-		return {
-			gameFilter: undefined
-		}
-	},
-	methods: {
-		log(value: any) {
-			console.log(value)
-		}
 	},
 })
 </script>
@@ -57,16 +45,19 @@ body {
 	margin: 100px;
 }
 
+#app {
+	font-family: var(--default-font);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: center;
+}
+
 nav {
 	padding: 30px;
 
 	a {
 		font-weight: bold;
 		color: var(--text);
-
-		&.router-link-exact-active {
-			color: #42b983;
-		}
 	}
 }
 </style>

@@ -211,7 +211,7 @@ import {
 	allEnumItems, copy
 } from '@utils/utils'
 import {
-	Filter, Platform, Tag
+	Filter, Platforms, Tag
 } from '@types'
 import {
 	EMPTY_FILTER, RARITIES
@@ -252,7 +252,7 @@ export default defineComponent({
 			return allEnumItems(Tag)
 		},
 		platforms() {
-			return allEnumItems(Platform)
+			return allEnumItems(Platforms)
 		},
 	},
 	methods: {

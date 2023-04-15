@@ -4,30 +4,39 @@
 	>
 		<ul class="game-card__platforms">
 			<li
-				v-for="platform in game.platforms.slice(0, 3)"
-				:key="platform"
+				v-for="platformGroup in Object.keys(mergedPlatforms)"
+				:key="platformGroup"
 			>
-				<v-icon
-					size="24"
-					:icon="platform"
-					class="platform-icon"
-				/>
+				<div>
+					<v-icon
+						class="platform-icon"
+						size="24"
+						:icon="platformIcons[platformGroup as Platforms]"
+					/>
+					<v-tooltip
+						activator="parent"
+						location="top"
+					>
+						{{ generatePlatformTooltipText(mergedPlatforms[platformGroup as Platforms] || []) }}
+					</v-tooltip>
+				</div>
 			</li>
 		</ul>
+
 		<div class="game-card__rarity" />
 
 		<div class="game-card__content">
 			<time
 				class="release-date"
-				:datetime="formattedDate.toString()"
-			>{{ formattedDate }}</time>
+				:datetime="releaseYear.toString()"
+			>{{ releaseYear }}</time>
 			<div class="title-wrapper">
 				<h3 class="title">
 					{{ game.title }}
 				</h3>
 				<div class="details">
 					<div class="details__item">
-						{{ game.duration }} {{ $t('hours') }}
+						{{ gameDuration }}
 						<v-icon
 							size="16"
 							icon="mdi-clock-time-four"
@@ -35,7 +44,7 @@
 						/>
 					</div>
 					<div class="details__item">
-						{{ game.score }}
+						{{ score }}
 						<v-icon
 							size="16"
 							icon="mdi-star"
@@ -49,11 +58,12 @@
 					v-for="tag in game.tags.slice(0, 2)"
 					:key="tag"
 					class="tags__item"
+					:style="{ backgroundColor: getTagColor(tag)}"
 				>
 					{{ tag }}
 				</div>
 				<div
-					v-if="moreTags"
+					v-if="moreTags > 0"
 					class="more"
 				>
 					+{{ moreTags }} more
@@ -65,72 +75,124 @@
 
 <script lang="ts">
 import {
-	Rarity, Tag
-} from '@/types'
-import { defineComponent } from 'vue'
-import { RARITY_ARRAY } from '../../utils/constants'
+	PropType, defineComponent 
+} from 'vue'
+import {
+	Game, GameForCard, MergedPlatforms, Platforms
+} from '@types'
+import {
+	PLATFORM_ICONS, RARITIES 
+} from '@constants'
+import {
+	getTagColor, mergePlatforms 
+} from '@utils/utils'
 
 export default defineComponent({
 	name: 'GameCard',
-	components: {
+	props: {
+		game: {
+			type: Object as PropType<GameForCard>,
+			required: true
+		}
 	},
 	data() {
 		return {
-			game: {
-				title: 'Death Stranding Director\'s Cut',
-				releaseDate: new Date(2012, 7, 23),
-				imageSource: 'https://m.media-amazon.com/images/M/MV5BZWFjMmY2NTEtNjAzNi00OTZkLWJiOTMtNWZkZDk4NzZhZjJlXkEyXkFqcGdeQXVyMTI0MzA4NTgw._V1_.jpg',
-				tags: [Tag['for adults'],
-					Tag.arcade,
-					Tag.adventure],
-				platforms: ['mdi-desktop-classic',
-					'mdi-sony-playstation',
-					'mdi-microsoft-xbox'],
-				rarity: Rarity.GOTY,
-				duration: 12,
-				score: 69
-			}
+			backgroundImage: ''
 		}
 	},
-
 	computed: {
-		backgroundImage(): string {
-			return `url(${this.game.imageSource})`
-		},
-
 		// todo: write util function to get rarity color
 		rarityColor(): string {
-			return '#7440C9'
+			return `var(--rarity-${RARITIES[this.game.rarity]})`
 		},
 
-		formattedDate(): number {
-			return this.game.releaseDate.getFullYear()
+		releaseYear(): number {
+			return new Date(this.game.releaseDate).getFullYear()
 		},
 
 		moreTags(): number {
 			return this.game.tags.length - 2
+		},
+
+		gameDuration(): string {
+			return this.game.duration ? this.game.duration + this.$t('hours') : 'ー'
+		},
+
+		score(): string | number {
+			return this.game.score || 'ー'
+		},
+
+		mergedPlatforms(): MergedPlatforms {
+			return mergePlatforms(this.game.platforms)
+		},
+
+		platformIcons() {
+			return PLATFORM_ICONS
+		},
+
+		Platforms() {
+			return Platforms
 		}
-	}
+	},
+	created() {
+		this.checkImageExistance()
+	},
+	methods: {
+		generatePlatformTooltipText(platforms: string[]): string {
+			return platforms.join(', ')
+		},
+		getTagColor(tag: string): string {
+			return getTagColor(tag)
+		},
+		checkImageExistance() {
+			if (!this.game.imageSource) {
+				this.backgroundImage = 'url("../../../noimage.jpg")'
+				return
+			}
+
+			const img = new Image()
+
+			img.onload = () => {
+				this.backgroundImage = `url(${this.game.imageSource})` 
+			}
+		
+			img.onerror = () => {
+				this.backgroundImage = 'url("../../../noimage.jpg")'
+			}
+
+			img.src = this.game.imageSource
+		}
+	},
 })
 </script>
 
 <style scoped lang="scss">
 .game-card {
 	position: relative;
+	user-select: none;
 	display: flex;
 	align-items: flex-end;
 	width: 320px;
 	height: 400px;
 	padding: 8px;
+	margin: 4px;
+	cursor: pointer;
 	border-radius: 8px;
 	background-image: v-bind(backgroundImage);
 	background: linear-gradient(to top, #000000 20%, rgba(0, 0, 0, 0.2) 50%), v-bind(backgroundImage);
 	background-size: cover;
-	// todo: add rarity vars to css
-	box-shadow: 0px 0px 4px #7440C9;
+	background-position: center;
+	background-repeat: no-repeat;
+	box-shadow: 0px 0px 4px v-bind(rarityColor);
+	transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
 
+	&:hover {
+		box-shadow: 0px 0px 40px v-bind(rarityColor);
+		transform: scale(1.03);
+	}
 
 	&__platforms {
+		display: flex;
 		position: absolute;
 		top: 8px;
 		left: 8px;
@@ -173,6 +235,8 @@ export default defineComponent({
 				font-weight: 700;
 				line-height: 28px;
 				max-width: 75%;
+				user-select: text;
+				cursor: text;
 			}
 
 			.details {
@@ -202,7 +266,6 @@ export default defineComponent({
 				padding: 4px 8px;
 				margin-right: 8px;
 				border-radius: 8px;
-				background-color: #2D5B37;
 				font-weight: 700;
 				line-height: 16px;
 			}
@@ -211,6 +274,7 @@ export default defineComponent({
 				display: flex;
 				align-items: center;
 				font-weight: 300;
+				pointer-events: none;
 			}
 		}
 	}
