@@ -30,7 +30,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import GameCard from '@components/game-card/GameCard.vue'
+import GameCard from '@components/GameCard/GameCard.vue'
 import { GameForCard } from '@types'
 import GET_ALL_GAMES from '@/graphql/queries/GET_ALL_GAMES'
 

@@ -1,7 +1,7 @@
 import {
 	createRouter, createWebHistory, RouteRecordRaw
 } from 'vue-router'
-import GamesDashboard from '@pages/GamesDashboard.vue'
+import GamesDashboard from '@pages/GamesDashboard/GamesDashboard.vue'
 import ImageSearcher from '@pages/ImageSearcher/ImageSearcher.vue'
 
 const routes: Array<RouteRecordRaw> = [

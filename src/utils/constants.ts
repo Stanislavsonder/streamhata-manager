@@ -1,7 +1,9 @@
 import {
 	Filter, ImageExisting, Platforms
 } from '@types'
-import { deepCopy, removePlatformGroupsValues } from './utils'
+import {
+	deepCopy, removePlatformGroupsValues 
+} from './utils'
 
 export const RARITIES = [
 	'no-rank',

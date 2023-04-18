@@ -44,32 +44,6 @@ export default defineComponent({
 
 <style scoped lang="scss">
 	.menu-item {
-		padding: 0 8px;
-		position: relative;
-
-		&::after {
-			content: '';
-			position: absolute;
-			width: 100%;
-			transform: scaleX(0);
-			height: 4px;
-			bottom: -6px;
-			left: 0;
-			border-radius: 10px;
-			background-color: var(--detail);
-			transform-origin: bottom right;
-			transition: transform 0.5s ease-out;
-		}
-
-		&.active::after {
-			transform: scaleX(1);
-		}
-
-		&:hover::after {
-			transform: scaleX(1);
-			transform-origin: bottom left;
-		}
-
 		&:not(:last-child) {
 			margin-right: 20px;
 		}
@@ -79,10 +53,43 @@ export default defineComponent({
 			align-items: center;
 			text-decoration: none;
 			font-size: 24px;
+			color: var(--text-secondary);
+			transition: color 0.5s ease-out;
+			position: relative;
+			padding: 0 12px;
 
 			&__label {
 				margin-left: 8px;
 				font-weight: 400;
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				width: 0;
+				height: 4px;
+				bottom: -8px;
+				left: 0;
+				border-radius: 12px;
+				background-color: var(--detail);
+				transform-origin: bottom right;
+				transition: width 0.5s ease-out;
+			}
+
+			&:hover {
+				color: var(--text);
+			}
+
+			&.router-link-active {
+				color: var(--text);
+			}
+
+			&.router-link-active::after {
+				width: 100%;
+			}
+
+			&:hover::after {
+				width: 100%;
 			}
 		}
 	}
