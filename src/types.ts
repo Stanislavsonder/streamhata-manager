@@ -118,3 +118,8 @@ export type Filter = {
 	platforms: Excludable<string[]>
 	rarity: Excludable<Rarity[]>
 }
+
+export type SearchType = {
+	caption: string
+	value: string
+}

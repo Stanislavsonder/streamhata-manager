@@ -1,5 +1,5 @@
 import {
-	Filter, ImageExisting, Platforms
+	Filter, ImageExisting, Platforms, SearchType
 } from '@types'
 import {
 	deepCopy, removePlatformGroupsValues 
@@ -70,6 +70,17 @@ export const PLATFORM_ICONS = {
 	[Platforms.Mobile]: 'mdi-cellphone-basic',
 	[Platforms.Other]: 'mdi-dots-horizontal'
 }
+
+export const GAMES_SEARCH_OPTIONS: SearchType[] = [
+	{
+		caption: 'Title',
+		value: 'title'
+	},
+	{
+		caption: 'Developers',
+		value: 'developers'
+	},
+]
 
 export const tagColors = [
 	'#664d00CC',
