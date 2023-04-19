@@ -28,7 +28,7 @@
 						md="7"
 					>
 						<v-text-field
-							v-model="search"
+							v-model="searchValue"
 							label="Search"
 							density="compact"
 							single-line
@@ -41,7 +41,7 @@
 						md="2"
 						align-self="center"
 					>
-						<v-btn>
+						<v-btn @click="handleSearch">
 							Search
 						</v-btn>
 					</v-col>
@@ -92,7 +92,7 @@ const filterjson = JSON.stringify({
 
 interface Data {
 	games: GameForCard[],
-	search: string,
+	searchValue: string,
 	searchBy: SearchType
 }
 
@@ -104,7 +104,7 @@ export default defineComponent({
 	data(): Data {
 		return {
 			games: [],
-			search: '',
+			searchValue: '',
 			searchBy: {
 				caption: 'Title',
 				value: 'title'
@@ -126,6 +126,11 @@ export default defineComponent({
 	computed: {
 		searchOptions(): SearchType[] {
 			return GAMES_SEARCH_OPTIONS
+		}
+	},
+	methods: {
+		handleSearch() {
+			console.log(this.searchBy, this.searchValue)
 		}
 	}
 })
