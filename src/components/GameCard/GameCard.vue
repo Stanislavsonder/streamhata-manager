@@ -78,7 +78,7 @@ import {
 	PropType, defineComponent 
 } from 'vue'
 import {
-	Game, GameForCard, MergedPlatforms, Platforms
+	GameForCard, MergedPlatforms, Platforms
 } from '@types'
 import {
 	PLATFORM_ICONS, RARITIES 

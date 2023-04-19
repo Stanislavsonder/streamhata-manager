@@ -35,25 +35,6 @@
 						</v-btn>
 					</RouterLink>
 				</li>
-				<li
-					class="account-options__item"
-				>
-					<RouterLink
-						class="link"
-						to="#"
-					>
-						<v-btn
-							icon=""
-							color="error"
-							variant="plain"
-						>
-							<v-icon
-								size="40"
-								icon="mdi-exit-to-app"
-							/>
-						</v-btn>
-					</RouterLink>
-				</li>
 			</ul>
 		</nav>
 	</header>
@@ -92,13 +73,13 @@ export default defineComponent({
 					key: 'players',
 					label: 'header-menu__players',
 					icon: 'mdi-account-group',
-					link: '#'
+					link: 'players'
 				},
 				{
 					key: 'sessions',
 					label: 'header-menu__sessions',
 					icon: 'mdi-television-shimmer',
-					link: '#'
+					link: 'sessions'
 				},
 				{
 					key: 'image-searcher',
@@ -119,19 +100,16 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .header {
-	// todo: change to var
 	background-color: var(--surface);
 	position: sticky;
 	top: 0;
 	z-index: 5;
 
-
-
 	&__nav {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		padding: 16px;
+		padding: 20px 16px;
 	}
 }
 

@@ -10,11 +10,12 @@ const darkTheme = {
 		secondary: '#03DAC6',
 		'secondary-darken-1': '#018786',
 		text: '#F9F6F0',
+		'text-secondary': '#b3b3b3',
 		error: '#B00020',
 		info: '#2196F3',
 		success: '#4CAF50',
 		warning: '#FB8C00',
-		detail: '#FB2576',
+		detail: '#8a3455',
 		...rarityColorsVuetify
 	}
 }

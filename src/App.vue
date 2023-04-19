@@ -32,7 +32,7 @@ body > * {
 }
 
 body {
-	height: 100%;
+	height: fit-content;
 	position: relative;
 	text-align: center;
 }
