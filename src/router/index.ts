@@ -3,6 +3,7 @@ import {
 } from 'vue-router'
 import GamesDashboard from '@pages/GamesDashboard/GamesDashboard.vue'
 import ImageSearcher from '@pages/ImageSearcher/ImageSearcher.vue'
+import GameOverview from '@pages/GameOverview/GameOverview.vue'
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -10,6 +11,9 @@ const routes: Array<RouteRecordRaw> = [
 	},
 	{
 		path: '/games', component: GamesDashboard
+	},
+	{
+		path: '/games/:gameId', component: GameOverview
 	},
 	{
 		path: '/image-searcher', component: ImageSearcher

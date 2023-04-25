@@ -18,7 +18,6 @@
 							label="Search By"
 							variant="solo"
 							density="compact"
-							return-object
 							hide-details
 							class="search__type"
 						/>
@@ -71,7 +70,6 @@
 			</ul>
 		</div>
 	</div>
-
 </template>
 
 <script lang="ts">
@@ -79,20 +77,20 @@ import { defineComponent } from 'vue'
 
 import GameCard from '@components/common/GameCard/GameCard.vue'
 import {
-	GameForCard, SearchType 
+	GameForCard, SearchType
 } from '@types'
 import GET_ALL_GAMES from '@/graphql/queries/GET_ALL_GAMES'
 import { GAMES_SEARCH_OPTIONS } from '@constants'
 
 const filterjson = JSON.stringify({
 	score: {
-		$gt: 0
+		$gt: 95
 	}
 })
 
 interface Data {
-	games: GameForCard[],
-	searchValue: string,
+	games: GameForCard[]
+	searchValue: string
 	searchBy: SearchType
 }
 
@@ -170,7 +168,7 @@ export default defineComponent({
 		.loading {
 			font-size: 32px;
 		}
-		
+
 		.cards {
 			display: flex;
 			flex-direction: row;

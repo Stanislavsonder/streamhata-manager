@@ -5,3 +5,8 @@ body {
 .v-tooltip {
 	font-family: var(--default-font) !important;
 }
+
+.link-no-style {
+	text-decoration: none; 
+	color: inherit;
+}

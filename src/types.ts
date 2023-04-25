@@ -85,6 +85,7 @@ export type Game = {
 	score: number
 	imageAspectRatio?: number
 	imageQuality?: number
+	metacriticUrl?: string
 }
 
 export type GameForCard = Omit<Game, 'developers' | 'description'>

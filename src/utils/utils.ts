@@ -60,3 +60,12 @@ export function getTagColor(tag: string): string {
 export function deepCopy<T>(obj: T): T {
 	return JSON.parse(JSON.stringify(obj))
 }
+
+export function getColor(idealValue: number, delta: number, currentValue: number): string {
+	const shift = Math.min(Math.abs(idealValue - currentValue), idealValue)
+	const index = 255 / delta
+	const colorIndex = Math.round(Math.min((index * shift), 255))
+	const red = colorIndex
+	const green = 255 - colorIndex
+	return `rgb(${red} ${green} 0)`
+}
