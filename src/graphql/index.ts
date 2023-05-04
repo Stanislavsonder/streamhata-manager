@@ -5,7 +5,8 @@ import { createApolloProvider } from '@vue/apollo-option'
 
 
 const httpLink = createHttpLink({
-	uri: 'https://streamhata.xyz:2334/graphql',
+	// uri: 'https://streamhata.xyz:2334/graphql',
+	uri: 'http://localhost:2334/graphql',
 })
 
 const cache = new InMemoryCache()

@@ -4,7 +4,7 @@
 	"header-menu__sessions": "Сессии",
 	"header-menu__image-searcher": "Поисковик изображений",
 	"hours": "ч",
-  	"test-string": "Это русский язык.",
+	"test-string": "Это русский язык.",
 	"rarity__no-rank": "Без ранга",
 	"rarity__trash": "Мусор",
 	"rarity__common": "Обычная",
@@ -39,5 +39,16 @@
 	"image-searcher__aspect-ratio-index": "Индекс соотношения сторон",
 	"image-searcher__quality-index": "Индекс качества",
 	"image-searcher__add-manually": "Добавить ссылку вручную",
-	"image-searcher__possible-images": "Возможные изображения"
+	"image-searcher__possible-images": "Возможные изображения",
+	"game-overview__title": "Название",
+	"game-overview__release-date": "Дата выпуска",
+	"game-overview__developers": "Разработчики",
+	"game-overview__score": "Рейтинг",
+	"game-overview__duration": "Длительность (ч)",
+	"game-overview__rarity": "Редкость",
+	"game-overview__platforms": "Платформы",
+	"game-overview__tags": "Теги",
+	"game-overview__description": "Описание",
+	"cancel": "Отмена",
+	"edit": "Редактировать"
 }

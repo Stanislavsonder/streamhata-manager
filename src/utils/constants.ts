@@ -165,3 +165,27 @@ export const RARITY_FOR_VIEW_ARRAY = [
 	'Masterpiece',
 	'GOTY'
 ]
+
+export const RARITIES_FOR_SELECT = [
+	{
+		value: 0, title: 'No Rank'
+	},
+	{
+		value: 1, title: 'Trash'
+	},
+	{
+		value: 2, title: 'Common'
+	},
+	{
+		value: 3, title: 'Good'
+	},
+	{
+		value: 4, title: 'Great'
+	},
+	{
+		value: 5, title: 'Masterpiece'
+	},
+	{
+		value: 6, title: 'GOTY'
+	}
+]

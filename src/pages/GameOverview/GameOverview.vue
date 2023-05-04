@@ -9,6 +9,7 @@
 					<img
 						:src="game.imageSource"
 						:alt="`Poster for ${game.title}`"
+						class="game-image"
 					>
 					<p>
 						{{ $t('image-searcher__aspect-ratio-index') }}:
@@ -34,8 +35,13 @@
 						</a>
 					</div>
 				</div>
+
 				<div class="game__column right-col">
-					<div class="game-info-section title-info">
+					<!-- Title Info -->
+					<div
+						v-if="!isEditMode"
+						class="game-info-section title-info"
+					>
 						<p class="title-info__title">
 							{{ game.title }}
 						</p>
@@ -46,7 +52,43 @@
 							{{ developers }}
 						</p>
 					</div>
-					<div class="game-info-section parameters-info">
+
+					<!-- Edit Title Info  -->
+					<div
+						v-else
+						class="game-info-section title-info edit-mode"
+					>
+						<v-text-field
+							v-model="editedGame.title"
+							:label="$t('image-searcher__title')"
+							density="compact"
+							hide-details
+							required
+						/>
+						<v-text-field
+							v-model="editedGame.releaseDate"
+							:label="$t('game-overview__release-date')"
+							density="compact"
+							hide-details
+							required
+							type="date"
+						/>
+						<v-combobox
+							v-model="editedGame.developers"
+							:items="editedGame.developers"
+							:label="$t('game-overview__developers')"
+							chips
+							density="compact"
+							hide-details
+							multiple
+						/>
+					</div>
+
+					<!-- Parameters Info -->
+					<div
+						v-if="!isEditMode"
+						class="game-info-section parameters-info"
+					>
 						<p>
 							<v-icon
 								size="20"
@@ -73,7 +115,43 @@
 						</p>
 					</div>
 
-					<div class="game-info-section platforms">
+					<!-- Edit Parameters Info -->
+					<div
+						v-else
+						class="game-info-section parameters-info edit-mode"
+					>
+						<v-text-field
+							v-model.number="editedGame.score"
+							:label="$t('game-overview__score')"
+							density="compact"
+							hide-details
+							required
+							type="number"
+						/>
+						<v-text-field
+							v-model.number="editedGame.duration"
+							:label="$t('game-overview__duration')"
+							density="compact"
+							hide-details
+							required
+							type="number"
+						/>
+						<v-select
+							v-model="editedGame.rarity"
+							:items="rarityOptions"
+							density="compact"
+							hide-details
+							item-title="title"
+							item-value="value"
+							:label="$t('game-overview__rarity')"
+						/>
+					</div>
+
+					<!-- Platforms Info -->
+					<div
+						v-if="!isEditMode"
+						class="game-info-section platforms"
+					>
 						<ul class="platforms__items">
 							<li
 								v-for="platformGroup in Object.keys(mergedPlatforms)"
@@ -89,13 +167,31 @@
 										activator="parent"
 										location="top"
 									>
-										{{ generatePlatformTooltipText(mergedPlatforms[platformGroup as Platforms] || []) }}
+										{{
+											generatePlatformTooltipText(mergedPlatforms[platformGroup as Platforms] || [])
+										}}
 									</v-tooltip>
 								</div>
 							</li>
 						</ul>
 					</div>
 
+					<!-- Edit Platforms Info -->
+					<div
+						v-else
+						class="game-info-section platforms"
+					>
+						<v-select
+							v-model="editedGame.platforms"
+							:items="platformOptions"
+							chips
+							hide-details
+							:label="$t('game-overview__platforms')"
+							multiple
+						/>
+					</div>
+
+					<!-- Tags -->
 					<div class="game-info-section tags">
 						<div
 							v-for="tag in game.tags"
@@ -109,8 +205,67 @@
 							no tags
 						</div>
 					</div>
-					<div class="game-info-section description">
+
+					<!-- Description -->
+					<div
+						v-if="!isEditMode"
+						class="game-info-section description"
+					>
 						<p>{{ game.description }}</p>
+					</div>
+
+					<!-- Edit Description -->
+					<div
+						v-else
+						class="game-info-section description"
+					>
+						<v-textarea
+							:label="$t('game-overview__description')"
+							v-model="editedGame.description"
+							auto-grow
+						/>
+					</div>
+
+					<div class="instruments">
+						<!-- EDIT BUTTON -->
+						<v-btn
+							class="ma-2"
+							@click="activateEditMode"
+							v-if="!isEditMode"
+						>
+							{{ $t('edit') }}
+							<v-icon
+								end
+								icon="mdi-pencil"
+							/>
+						</v-btn>
+
+						<!-- CANCEL BUTTON -->
+						<v-btn
+							class="ma-2"
+							@click="cancelEdit"
+							v-if="isEditMode"
+						>
+							{{ $t('cancel') }}
+							<v-icon
+								end
+								icon="mdi-cancel"
+							/>
+						</v-btn>
+
+						<!-- SAVE BUTTON -->
+						<v-btn
+							class="ma-2"
+							color="primary"
+							@click="updateGame"
+							v-if="isEditMode"
+						>
+							{{ $t('apply') }}
+							<v-icon
+								end
+								icon="mdi-check-bold"
+							/>
+						</v-btn>
 					</div>
 				</div>
 			</div>
@@ -120,20 +275,29 @@
 
 <script lang="ts">
 import GET_GAME from '@/graphql/queries/GET_GAME'
+import UPDATE_GAME from '@/graphql/mutations/UPDATE_GAME'
 import {
-	Game, MergedPlatforms, Platforms 
+	Game,
+	MergedPlatforms,
+	Platforms
 } from '@/types'
 import {
-	PLATFORM_ICONS, RARITY_FOR_VIEW_ARRAY 
+	PLATFORM_ICONS, RARITIES_FOR_SELECT, RARITY_FOR_VIEW_ARRAY
 } from '@/utils/constants'
 import {
-	getColor, getTagColor, mergePlatforms 
+	deepCopy,
+	getColor,
+	getTagColor,
+	mergePlatforms
 } from '@/utils/utils'
 import { defineComponent } from 'vue'
+import { ALL_PLATFORMS } from '@/utils/constants'
 
 interface Data {
 	gameId: string
 	game: Game
+	editedGame: Game
+	isEditMode: boolean
 }
 
 export default defineComponent({
@@ -141,10 +305,15 @@ export default defineComponent({
 	data(): Data {
 		return {
 			gameId: this.$route.params.gameId as string,
-			game: {} as Game
+			game: {} as Game,
+			editedGame: {} as Game,
+			isEditMode: false
 		}
 	},
 	computed: {
+		Platforms() {
+			return Platforms
+		},
 		imageQuality(): number {
 			return this.game.imageQuality || 0
 		},
@@ -171,9 +340,44 @@ export default defineComponent({
 		},
 		platformIcons() {
 			return PLATFORM_ICONS
+		},
+		rarityOptions() {
+			return RARITIES_FOR_SELECT
+		},
+		platformOptions() {
+			return ALL_PLATFORMS
 		}
 	},
 	methods: {
+		activateEditMode() {
+			this.isEditMode = true
+			this.editedGame = deepCopy(this.game)
+			this.editedGame.releaseDate = new Date(this.editedGame.releaseDate).toDateString()
+		},
+		cancelEdit() {
+			this.editedGame = {} as Game
+			this.isEditMode = false
+		},
+		async updateGame() {
+			const gameInput = this.transformGameForInput()
+			const updatedGame = await this.$apollo.mutate({
+				mutation: UPDATE_GAME,
+				variables: {
+					game: gameInput
+				},
+				fetchPolicy: 'no-cache',
+			})
+			this.game = updatedGame.data.updateGame
+			this.isEditMode = false
+			this.editedGame = {} as Game
+		},
+		transformGameForInput(): Game {
+			const tmpGame = deepCopy(this.editedGame)
+			tmpGame.releaseDate = new Date(tmpGame.releaseDate).toDateString()
+			delete tmpGame.__typename
+			tmpGame.releaseDate = tmpGame.releaseDate.toString()
+			return tmpGame
+		},
 		getColor(idealValue: number, delta: number, currentValue: number): string {
 			return getColor(idealValue, delta, currentValue)
 		},
@@ -187,14 +391,11 @@ export default defineComponent({
 	apollo: {
 		game: {
 			query: GET_GAME,
-			// очень странная хуйня, что нужно обозначить возвращаемый тип, иначе выскочит ошибка
 			variables(): { id: string } {
 				return { id: this.gameId }
 			},
 			update: data => data.getGame,
-			result(ApolloQueryResult, key) {
-				console.log(this.game)
-			}
+			fetchPolicy: 'no-cache'
 		}
 	}
 })
@@ -206,34 +407,38 @@ export default defineComponent({
 	justify-content: center;
 
 	&__wrapper {
-		background-color: var(--surface);
+		display: flex;
+		flex-direction: column;
 		width: 75%;
 		height: calc(100vh - var(--header-height));
 		max-width: 1200px;
-		padding: 20px;
-		display: flex;
-		flex-direction: column;
-	
+		padding: 32px 24px;
+		background-color: var(--surface);
+
 		.game-id {
-			color: var(--text-secondary);
+			margin-bottom: 8px;
 			font-size: 14px;
 			text-align: initial;
-			margin-bottom: 8px;
+			color: var(--text-secondary);
 		}
-	
+
 		.game {
 			display: flex;
 			flex-direction: row;
 			flex-wrap: wrap;
-		
+
 			&__column {
 				display: flex;
 				flex-direction: column;
-			
+
+				.game-image {
+					margin-bottom: 12px;
+				}
+
 				&.left-col {
 					width: 40%;
 				}
-			
+
 				&.right-col {
 					width: 60%;
 					padding: 0 12px;
@@ -242,18 +447,28 @@ export default defineComponent({
 				.links {
 					display: flex;
 					flex-direction: row;
+					margin-top: 12px;
 				}
 			}
 
 			.game-info-section {
-				border-bottom: 1px solid var(--background);
 				display: flex;
+				width: 100%;
 				padding: 16px;
+				border-bottom: 1px solid var(--background);
+
+				.v-input {
+					width: 100%;
+				}
 			}
 
 			.title-info {
 				flex-direction: column;
 				align-items: flex-start;
+
+				&.edit-mode {
+					gap: 12px;
+				}
 
 				&__title {
 					font-size: 36px;
@@ -270,6 +485,13 @@ export default defineComponent({
 
 			.parameters-info {
 				justify-content: space-around;
+				pointer-events: none;
+
+				&.edit-mode {
+					gap: 12px;
+					flex-direction: column;
+					pointer-events: all;
+				}
 
 				p {
 					font-size: 24px;
@@ -295,13 +517,15 @@ export default defineComponent({
 				display: flex;
 				flex-direction: column;
 				align-items: flex-start;
-				text-align: initial;font-size: 20px;
+				text-align: initial;
+				font-size: 20px;
 			}
 
 			.tags {
 				display: flex;
 				flex-direction: row;
 				font-size: 16px;
+				pointer-events: none;
 
 				&__item {
 					padding: 4px 8px;
@@ -310,6 +534,10 @@ export default defineComponent({
 					font-weight: 700;
 					line-height: 16px;
 				}
+			}
+
+			.instruments {
+				margin-top: 12px;
 			}
 
 		}

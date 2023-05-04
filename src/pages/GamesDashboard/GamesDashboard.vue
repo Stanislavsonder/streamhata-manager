@@ -82,7 +82,7 @@ import {
 import GET_ALL_GAMES from '@/graphql/queries/GET_ALL_GAMES'
 import { GAMES_SEARCH_OPTIONS } from '@constants'
 
-const filterjson = JSON.stringify({
+const filterJSON = JSON.stringify({
 	score: {
 		$gt: 95
 	}
@@ -90,8 +90,8 @@ const filterjson = JSON.stringify({
 
 interface Data {
 	games: GameForCard[]
-	searchValue: string
 	searchBy: SearchType
+	searchValue: string
 }
 
 export default defineComponent({
@@ -113,7 +113,7 @@ export default defineComponent({
 		games: {
 			query: GET_ALL_GAMES,
 			variables: {
-				filter: filterjson
+				filter: filterJSON
 			},
 			update: data => data.getGames,
 			result(ApolloQueryResult, key) {
@@ -158,6 +158,7 @@ export default defineComponent({
 		& > *:not(:last-child) {
 			margin-right: 12px;
 		}
+
 		&__icon {
 			margin-left: 4px;
 		}
