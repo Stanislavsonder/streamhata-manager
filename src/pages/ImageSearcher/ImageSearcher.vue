@@ -91,6 +91,7 @@ import GET_GAME_WITH_LOW_QUALITY_IMAGE from '@/graphql/queries/GET_GAME_WITH_LOW
 import ImageSearcherService, { ImageInfo } from '@/services/ImageSearcherService'
 import CHANGE_GAME_COVER from '@/graphql/mutations/CHANGE_GAME_COVER'
 import SearchedImage from '@pages/ImageSearcher/part/SearchedImage.vue'
+import { getColor } from '@/utils/utils'
 
 interface Data {
 	tmpImageLink: string
@@ -158,12 +159,7 @@ export default defineComponent({
 	},
 	methods: {
 		getColor(idealValue: number, delta: number, currentValue: number): string {
-			const shift = Math.min(Math.abs(idealValue - currentValue), idealValue)
-			const index = 255 / delta
-			const colorIndex = Math.round(Math.min((index * shift), 255))
-			const red = colorIndex
-			const green = 255 - colorIndex
-			return `rgb(${red} ${green} 0)`
+			return getColor(idealValue, delta, currentValue)
 		},
 		skip() {
 			this.$apollo.queries.currentGame.refetch({

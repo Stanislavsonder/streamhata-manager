@@ -39,5 +39,16 @@
 	"image-searcher__aspect-ratio-index": "Aspect ratio index",
 	"image-searcher__quality-index": "Quality index",
 	"image-searcher__add-manually": "Add URL manually",
-	"image-searcher__possible-images": "Possible images"
+	"image-searcher__possible-images": "Possible images",
+	"game-overview__title": "Title",
+	"game-overview__release-date": "Release Date",
+	"game-overview__developers": "Developers",
+	"game-overview__score": "Score",
+	"game-overview__duration": "Duration (h)",
+	"game-overview__rarity": "Rarity",
+	"game-overview__platforms": "Platforms",
+	"game-overview__tags": "Tags",
+	"game-overview__description": "Description",
+	"cancel": "Cancel",
+	"edit": "Edit"
 }

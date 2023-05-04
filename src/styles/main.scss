@@ -5,3 +5,14 @@ body {
 .v-tooltip {
 	font-family: var(--default-font) !important;
 }
+
+.link-no-style {
+	text-decoration: none; 
+	color: inherit;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}

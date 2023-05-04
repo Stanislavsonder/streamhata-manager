@@ -35,8 +35,8 @@ export enum Tag {
 	'arcade' = 'Arcade',
 	'racing' = 'Racing',
 	'strategy' = 'Strategy',
-	'simulator'= 'Simulator',
-	'rpg'= 'RPG',
+	'simulator' = 'Simulator',
+	'rpg' = 'RPG',
 	'logic' = 'Puzzle',
 	'casual' = 'Casual',
 	'online' = 'Online',
@@ -46,7 +46,7 @@ export enum Tag {
 	'massively multiplayer' = 'MMO',
 	'cards' = 'Cards',
 	'fighting' = 'Fighting',
-	'for adults' =  'For Adults',
+	'for adults' = 'For Adults',
 	'for kids' = 'For Kids',
 	'educational' = 'Educational'
 }
@@ -75,7 +75,7 @@ export type Game = {
 	_id: UUID
 	title: string
 	description: string
-	releaseDate: Date
+	releaseDate: Date | string
 	imageSource: string
 	developers: string[]
 	tags: string[]
@@ -85,6 +85,8 @@ export type Game = {
 	score: number
 	imageAspectRatio?: number
 	imageQuality?: number
+	metacriticUrl?: string
+	__typename?: string
 }
 
 export type GameForCard = Omit<Game, 'developers' | 'description'>
@@ -117,4 +119,9 @@ export type Filter = {
 	tags: Excludable<string[]>
 	platforms: Excludable<string[]>
 	rarity: Excludable<Rarity[]>
+}
+
+export type SearchType = {
+	caption: string
+	value: string
 }

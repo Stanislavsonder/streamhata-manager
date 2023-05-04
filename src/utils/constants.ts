@@ -1,5 +1,5 @@
 import {
-	Filter, ImageExisting, Platforms
+	Filter, ImageExisting, Platforms, SearchType
 } from '@types'
 import {
 	deepCopy, removePlatformGroupsValues 
@@ -70,6 +70,17 @@ export const PLATFORM_ICONS = {
 	[Platforms.Mobile]: 'mdi-cellphone-basic',
 	[Platforms.Other]: 'mdi-dots-horizontal'
 }
+
+export const GAMES_SEARCH_OPTIONS: SearchType[] = [
+	{
+		caption: 'Title',
+		value: 'title'
+	},
+	{
+		caption: 'Developers',
+		value: 'developers'
+	},
+]
 
 export const tagColors = [
 	'#664d00CC',
@@ -153,4 +164,28 @@ export const RARITY_FOR_VIEW_ARRAY = [
 	'Great',
 	'Masterpiece',
 	'GOTY'
+]
+
+export const RARITIES_FOR_SELECT = [
+	{
+		value: 0, title: 'No Rank'
+	},
+	{
+		value: 1, title: 'Trash'
+	},
+	{
+		value: 2, title: 'Common'
+	},
+	{
+		value: 3, title: 'Good'
+	},
+	{
+		value: 4, title: 'Great'
+	},
+	{
+		value: 5, title: 'Masterpiece'
+	},
+	{
+		value: 6, title: 'GOTY'
+	}
 ]

@@ -29,7 +29,7 @@
 							icon=""
 						>
 							<v-icon
-								size="40"
+								size="36"
 								icon="mdi-account-circle"
 							/>
 						</v-btn>
@@ -67,25 +67,25 @@ export default defineComponent({
 					key: 'games',
 					label: 'header-menu__games',
 					icon: 'mdi-controller',
-					link: 'games',
+					link: '/games',
 				},
 				{
 					key: 'players',
 					label: 'header-menu__players',
 					icon: 'mdi-account-group',
-					link: 'players'
+					link: '/players'
 				},
 				{
 					key: 'sessions',
 					label: 'header-menu__sessions',
 					icon: 'mdi-television-shimmer',
-					link: 'sessions'
+					link: '/sessions'
 				},
 				{
 					key: 'image-searcher',
 					label: 'header-menu__image-searcher',
 					icon: 'mdi-television-shimmer',
-					link: 'image-searcher'
+					link: '/image-searcher'
 				}
 			]
 		}
@@ -104,12 +104,13 @@ export default defineComponent({
 	position: sticky;
 	top: 0;
 	z-index: 5;
+	box-shadow: 0px 7px 20px 4px rgba(0,0,0,0.75);
 
 	&__nav {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		padding: 20px 16px;
+		padding: 12px 16px;
 	}
 }
 

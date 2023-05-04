@@ -9,7 +9,7 @@
 		>
 			<v-icon
 				class="link__icon"
-				size="48"
+				size="36"
 				:icon="option.icon"
 			/>
 			<span class="link__label">
@@ -61,6 +61,7 @@ export default defineComponent({
 			&__label {
 				margin-left: 8px;
 				font-weight: 400;
+				font-size: 24px;			
 			}
 
 			&::after {

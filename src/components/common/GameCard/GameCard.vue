@@ -1,76 +1,84 @@
 <template>
-	<article
-		class="game-card"
+	<RouterLink
+		:to="`/games/${game._id}`"
+		class="link-no-style"
 	>
-		<ul class="game-card__platforms">
-			<li
-				v-for="platformGroup in Object.keys(mergedPlatforms)"
-				:key="platformGroup"
-			>
-				<div>
-					<v-icon
-						class="platform-icon"
-						size="24"
-						:icon="platformIcons[platformGroup as Platforms]"
-					/>
-					<v-tooltip
-						activator="parent"
-						location="top"
+		<article
+			class="game-card"
+		>
+			<ul class="game-card__platforms">
+				<li
+					v-for="platformGroup in Object.keys(mergedPlatforms)"
+					:key="platformGroup"
+				>
+					<div>
+						<v-icon
+							class="platform-icon"
+							size="24"
+							:icon="platformIcons[platformGroup as Platforms]"
+						/>
+						<v-tooltip
+							activator="parent"
+							location="top"
+						>
+							{{ generatePlatformTooltipText(mergedPlatforms[platformGroup as Platforms] || []) }}
+						</v-tooltip>
+					</div>
+				</li>
+			</ul>
+
+			<div class="game-card__rarity" />
+
+			<div class="game-card__content">
+				<time
+					class="release-date"
+					:datetime="releaseYear.toString()"
+				>{{ releaseYear }}</time>
+				<div class="title-wrapper">
+					<h3 class="title">
+						{{ game.title }}
+					</h3>
+					<div class="details">
+						<div class="details__item">
+							{{ gameDuration }}
+							<v-icon
+								size="16"
+								icon="mdi-clock-time-four"
+								class="icon"
+							/>
+						</div>
+						<div class="details__item">
+							{{ score }}
+							<v-icon
+								size="16"
+								icon="mdi-star"
+								class="icon"
+							/>
+						</div>
+					</div>
+				</div>
+				<div class="tags">
+					<div
+						v-for="tag in game.tags.slice(0, 2)"
+						:key="tag"
+						class="tags__item"
+						:style="{ backgroundColor: getTagColor(tag)}"
 					>
-						{{ generatePlatformTooltipText(mergedPlatforms[platformGroup as Platforms] || []) }}
-					</v-tooltip>
-				</div>
-			</li>
-		</ul>
-
-		<div class="game-card__rarity" />
-
-		<div class="game-card__content">
-			<time
-				class="release-date"
-				:datetime="releaseYear.toString()"
-			>{{ releaseYear }}</time>
-			<div class="title-wrapper">
-				<h3 class="title">
-					{{ game.title }}
-				</h3>
-				<div class="details">
-					<div class="details__item">
-						{{ gameDuration }}
-						<v-icon
-							size="16"
-							icon="mdi-clock-time-four"
-							class="icon"
-						/>
+						{{ tag }}
 					</div>
-					<div class="details__item">
-						{{ score }}
-						<v-icon
-							size="16"
-							icon="mdi-star"
-							class="icon"
-						/>
+					<div
+						v-if="moreTags > 0"
+						class="more"
+					>
+						+{{ moreTags }} more
+					</div>
+					<div v-if="!game.tags.length">
+						no tags
 					</div>
 				</div>
 			</div>
-			<div class="tags">
-				<div
-					v-for="tag in game.tags.slice(0, 2)"
-					:key="tag"
-					class="tags__item"
-					:style="{ backgroundColor: getTagColor(tag)}"
-				>
-					{{ tag }}
-				</div>
-				<div
-					v-if="moreTags > 0"
-					class="more"
-				>
-					+{{ moreTags }} more
-				</div>
-			</div>
-		</div>
-	</article>
+		</article>
+	</RouterLink>
 </template>
 
 <script lang="ts">
@@ -155,7 +163,7 @@ export default defineComponent({
 			img.onload = () => {
 				this.backgroundImage = `url(${this.game.imageSource})` 
 			}
-		
+
 			img.onerror = () => {
 				this.backgroundImage = 'url("../../../noimage.jpg")'
 			}
